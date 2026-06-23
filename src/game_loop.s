@@ -67,9 +67,11 @@ loop_playing_level:
     call check_player_powerup_collisions
 
     call advance_wave
+    call update_animation_frame
 
     call begin_frame
 
+    call draw_background
     call draw_enemies
     call draw_boss_square
     call draw_bullets
@@ -130,5 +132,4 @@ end_debug_stop_after_frames:
     ret
 
 debug_draw_core_state:
-    call draw_hud
-    ret
+    j draw_hud

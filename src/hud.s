@@ -22,66 +22,108 @@
 # ------------------------------------------------------------
 
 draw_hud:
-    la t0, draw_frame
-    lw t1, 0(t0)
+    # Sprite hook: HUD visual pode substituir os numeros.
+    addi sp, sp, -8
+    sw ra, 0(sp)
+
+    call get_draw_base_address
+    sw a0, 4(sp)
+
+    la a0, label_pts
+    li a1, 8
+    li a2, 8
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_text
 
     la t0, score
     lw a0, 0(t0)
-    li a1, 8
+    li a1, 26
     li a2, 8
-    li a3, 0x000000FF
-    mv a4, t1
-    li a7, 101
-    ecall
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_number
+
+    la a0, label_vidas
+    li a1, 56
+    li a2, 8
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_text
 
     la t0, player_lives
     lw a0, 0(t0)
     li a1, 80
     li a2, 8
-    li a3, 0x000000FF
-    mv a4, t1
-    li a7, 101
-    ecall
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_number
+
+    la a0, label_fase
+    li a1, 110
+    li a2, 8
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_text
 
     la t0, current_level
     lw a0, 0(t0)
-    li a1, 120
+    li a1, 132
     li a2, 8
-    li a3, 0x000000FF
-    mv a4, t1
-    li a7, 101
-    ecall
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_number
+
+    la a0, label_wave
+    li a1, 158
+    li a2, 8
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_text
 
     la t0, current_wave
     lw a0, 0(t0)
-    li a1, 160
+    li a1, 180
     li a2, 8
-    li a3, 0x000000FF
-    mv a4, t1
-    li a7, 101
-    ecall
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_number
+
+    la a0, label_rest
+    li a1, 206
+    li a2, 8
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_text
 
     la t0, remaining_enemies
     lw a0, 0(t0)
-    li a1, 200
+    li a1, 228
     li a2, 8
-    li a3, 0x000000FF
-    mv a4, t1
-    li a7, 101
-    ecall
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_number
 
     la t0, boss_active
     lw t2, 0(t0)
     beqz t2, end_draw_hud
 
-    la t0, boss_hp
-    lw a0, 0(t0)
+    la a0, label_boss
     li a1, 260
     li a2, 8
-    li a3, 0x000000FF
-    mv a4, t1
-    li a7, 101
-    ecall
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_text
+
+    la t0, boss_hp
+    lw a0, 0(t0)
+    li a1, 282
+    li a2, 8
+    li a3, 0xFF
+    lw a4, 4(sp)
+    call draw_small_number
 
 end_draw_hud:
+    lw ra, 0(sp)
+    addi sp, sp, 8
     ret

@@ -43,7 +43,7 @@
 # Limites iniciais de entidades simultâneas
 # ------------------------------------------------------------
 
-.eqv MAX_BULLETS                  10
+.eqv MAX_BULLETS                  24
 .eqv MAX_ENEMIES                  15
 
 # ------------------------------------------------------------
@@ -66,10 +66,11 @@
 .eqv POWERUP_BOSS_WEAPON       3
 .eqv POWERUP_BOSS_AMMO         4
 .eqv MAX_POWERUPS              8
-.eqv POWERUP_SIZE              5
+.eqv POWERUP_SIZE              16
 
 .eqv WEAPON_NORMAL             1
 .eqv WEAPON_BOSS               2
+.eqv WEAPON_SHOTGUN            3
 
 .eqv PLAYER_MAX_LIVES          3
 .eqv NORMAL_AMMO_GAIN          5
@@ -77,6 +78,7 @@
 .eqv HEAL_GAIN                 1
 .eqv WEAPON_NORMAL_DAMAGE      1
 .eqv WEAPON_BOSS_DAMAGE        3
+.eqv WEAPON_SHOTGUN_DAMAGE     2
 
 # ------------------------------------------------------------
 # Configuracao das waves da fase 1: town
@@ -119,27 +121,54 @@
 # ------------------------------------------------------------
 
 .eqv DEBUG_LOOP_FRAMES          120
-.eqv DEBUG_FRAME_DELAY_MS       33
+.eqv DEBUG_FRAME_DELAY_MS       16
+.eqv ANIMATION_FRAME_DELAY      8
+.eqv SPRITE_FRAME_0             0
+.eqv SPRITE_FRAME_1             1
+
+# ------------------------------------------------------------
+# Fallbacks de renderizacao com sprites
+# ------------------------------------------------------------
+
+.eqv USE_SPRITE_PLAYER          1
+.eqv USE_SPRITE_ENEMIES         1
+.eqv USE_SPRITE_BOSS            1
+.eqv USE_SPRITE_POWERUPS        1
+.eqv USE_SPRITE_INVENTORY       0
 
 # ------------------------------------------------------------
 # Configuracao inicial do jogador
 # ------------------------------------------------------------
 
-.eqv PLAYER_START_X             160
-.eqv PLAYER_START_Y             120
-.eqv PLAYER_SPEED               8
-.eqv PLAYER_SIZE                8
+.eqv PLAYER_START_X             152
+.eqv PLAYER_START_Y             112
+.eqv PLAYER_SMOOTH_SPEED        2
+.eqv PLAYER_MOVE_HOLD_FRAMES    16
+.eqv PLAYER_SHOOT_HOLD_FRAMES   16
+.eqv PLAYER_SPEED               3
+.eqv PLAYER_SIZE                16
 
 .eqv PLAYER_MIN_X               0
-.eqv PLAYER_MAX_X               312
-.eqv PLAYER_MIN_Y               0
-.eqv PLAYER_MAX_Y               232
+.eqv PLAYER_MAX_X               304
+.eqv PLAYER_MIN_Y               20
+.eqv PLAYER_MAX_Y               200
 
 # ------------------------------------------------------------
 # Configuracao dos tiros
 # ------------------------------------------------------------
 
-.eqv BULLET_SPEED               8
+.eqv RIFLE_BULLET_SPEED         10
+.eqv RIFLE_MAG_SIZE             40
+.eqv RIFLE_FIRE_DELAY           4
+.eqv RIFLE_RELOAD_FRAMES        20
+.eqv RIFLE_START_RESERVE        60
+.eqv SHOTGUN_BULLET_SPEED       9
+.eqv SHOTGUN_SPREAD_SPEED       3
+.eqv SHOTGUN_MAG_SIZE           6
+.eqv SHOTGUN_FIRE_DELAY         14
+.eqv SHOTGUN_RELOAD_FRAMES      24
+.eqv SHOTGUN_UNLOCK_RESERVE     18
+.eqv BULLET_SPEED               10
 .eqv BULLET_SIZE                3
 .eqv BULLET_INACTIVE            0
 .eqv BULLET_ACTIVE              1
@@ -148,7 +177,7 @@
 # Configuracao dos inimigos
 # ------------------------------------------------------------
 
-.eqv ENEMY_SIZE                 8
+.eqv ENEMY_SIZE                 16
 
 # ------------------------------------------------------------
 # Pontuacao
@@ -169,9 +198,15 @@
 .eqv RAT_SPITTER_HP         1
 
 .eqv RAT_COMMON_SPEED       1
-.eqv RAT_ECHO_SPEED         2
+.eqv RAT_ECHO_SPEED         1
+.eqv RAT_ECHO_ALERT_SPEED   1
+.eqv RAT_ECHO_IDLE_SPEED    0
 .eqv RAT_MUTANT_SPEED       1
 .eqv RAT_SPITTER_SPEED      1
+
+.eqv NOISE_MOVE_FRAMES      18
+.eqv NOISE_SHOT_FRAMES      30
+.eqv NOISE_RELOAD_FRAMES    45
 
 # ------------------------------------------------------------
 # Projeteis inimigos
@@ -184,19 +219,42 @@
 .eqv ENEMY_BULLET_INACTIVE      0
 
 .eqv SPITTER_SHOOT_DELAY        45
+.eqv SPITTER_MIN_RANGE          55
+.eqv SPITTER_IDEAL_RANGE        85
+.eqv SPITTER_MAX_RANGE          125
+.eqv SPITTER_APPROACH_SPEED     1
+.eqv SPITTER_RETREAT_SPEED      1
+.eqv SPITTER_STRAFE_SPEED       1
+.eqv SPITTER_PROJECTILE_RANGE   90
+.eqv SPITTER_PROJECTILE_LIFE    45
+
+.eqv ENEMY_PROJECTILE_SPITTER       1
+.eqv ENEMY_PROJECTILE_BOSS_HEAVY    2
+.eqv SPITTER_PROJECTILE_SIZE        3
+.eqv SPITTER_PROJECTILE_DAMAGE      1
+.eqv BOSS_PROJECTILE_SIZE           10
+.eqv BOSS_PROJECTILE_DAMAGE         1
+.eqv BOSS_PROJECTILE_SPEED          2
+.eqv BOSS_PROJECTILE_LIFE           70
 
 # ------------------------------------------------------------
 # Boss Final
 # ------------------------------------------------------------
 
-.eqv BOSS_SIZE                 16
+.eqv BOSS_SIZE                 32
 .eqv BOSS_START_X              152
 .eqv BOSS_START_Y              32
 .eqv BOSS_HP_START             20
 .eqv BOSS_SPEED                1
 
 .eqv BOSS_MIN_X                24
-.eqv BOSS_MAX_X                280
+.eqv BOSS_MAX_X                272
 
 .eqv BOSS_SHOOT_DELAY          50
+.eqv BOSS_MELEE_RANGE          20
+.eqv BOSS_MELEE_DAMAGE         1
+.eqv BOSS_MELEE_COOLDOWN       60
+.eqv BOSS_HEAVY_SHOOT_DELAY    90
+.eqv BOSS_HEAVY_PROJECTILE_DX  0
+.eqv BOSS_HEAVY_PROJECTILE_DY  2
 .eqv SCORE_BOSS                1000

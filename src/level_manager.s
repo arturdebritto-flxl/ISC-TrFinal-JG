@@ -358,6 +358,12 @@ start_boss_fight:
     la t0, boss_attack_timer
     sw zero, 0(t0)
 
+    la t0, boss_melee_timer
+    sw zero, 0(t0)
+
+    la t0, boss_heavy_timer
+    sw zero, 0(t0)
+
     la t0, game_state
     li t1, STATE_BOSS
     sw t1, 0(t0)

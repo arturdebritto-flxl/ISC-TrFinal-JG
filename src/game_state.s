@@ -34,7 +34,10 @@ init_game:
     la t0, frame_counter
     sw zero, 0(t0)
 
-    la t0, draw_frame
+    la t0, animation_tick
+    sw zero, 0(t0)
+
+    la t0, animation_frame
     sw zero, 0(t0)
 
     la t0, debug_mode
@@ -144,6 +147,13 @@ set_state_victory:
     li t1, STATE_VICTORY
     sw t1, 0(t0)
 
+    li a0, 88
+    li a1, 180
+    li a2, 9
+    li a3, 90
+    li a7, 31
+    ecall
+
     ret
 
 # ------------------------------------------------------------
@@ -155,6 +165,13 @@ set_state_game_over:
     la t0, game_state
     li t1, STATE_GAME_OVER
     sw t1, 0(t0)
+
+    li a0, 38
+    li a1, 180
+    li a2, 9
+    li a3, 80
+    li a7, 31
+    ecall
 
     ret
 

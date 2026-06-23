@@ -181,13 +181,25 @@ apply_rat_score:
     add t6, t6, a4
     sw t6, 0(t0)
 
-    addi sp, sp, -4
+    addi sp, sp, -12
     sw t1, 0(sp)
+    sw a2, 4(sp)
+    sw a3, 8(sp)
+
+    la t0, current_level
+    lw t6, 0(t0)
+    li a4, LEVEL_SEWER
+    bne t6, a4, skip_shotgun_unlock
+    call unlock_shotgun
+
+skip_shotgun_unlock:
+    lw a2, 4(sp)
+    lw a3, 8(sp)
     mv a0, a2
     mv a1, a3
     call spawn_powerup_from_enemy_death
     lw t1, 0(sp)
-    addi sp, sp, 4
+    addi sp, sp, 12
 
     j next_collision_bullet
 
@@ -366,8 +378,13 @@ enemy_bullet_player_loop:
     # AABB: enemy bullet 3x3 contra player 8x8
     # --------------------------------------------------------
 
-    # bullet_right = bullet_x + ENEMY_BULLET_SIZE
+    la t0, enemy_bullet_size
+    add t4, t0, t3
+    lw t6, 0(t4)
+    bgtz t6, enemy_bullet_size_ok
     li t6, ENEMY_BULLET_SIZE
+
+enemy_bullet_size_ok:
     add a4, a0, t6
     ble a4, a2, next_enemy_bullet_player
 
@@ -376,8 +393,13 @@ enemy_bullet_player_loop:
     add a4, a2, t6
     bge a0, a4, next_enemy_bullet_player
 
-    # bullet_bottom = bullet_y + ENEMY_BULLET_SIZE
+    la t0, enemy_bullet_size
+    add t4, t0, t3
+    lw t6, 0(t4)
+    bgtz t6, enemy_bullet_size_y_ok
     li t6, ENEMY_BULLET_SIZE
+
+enemy_bullet_size_y_ok:
     add a4, a1, t6
     ble a4, a3, next_enemy_bullet_player
 
@@ -395,10 +417,16 @@ enemy_bullet_player_loop:
     add t4, t0, t3
     sw zero, 0(t4)
 
-    # player_lives -= 1
+    la t0, enemy_bullet_damage
+    add t4, t0, t3
+    lw t6, 0(t4)
+    bgtz t6, enemy_bullet_damage_ok
+    li t6, SPITTER_PROJECTILE_DAMAGE
+
+enemy_bullet_damage_ok:
     la t0, player_lives
     lw t5, 0(t0)
-    addi t5, t5, -1
+    sub t5, t5, t6
     sw t5, 0(t0)
 
     # Se vidas <= 0, GAME OVER

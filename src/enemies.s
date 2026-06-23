@@ -399,12 +399,11 @@ update_enemy_common:
     j move_rat_towards_player
 
 update_enemy_echo:
-    # RAT_ECHO so anda se o jogador se moveu neste frame
-    la t0, player_moved
+    la t0, noise_timer
     lw t6, 0(t0)
     beqz t6, next_update_enemy
 
-    li a5, RAT_ECHO_SPEED
+    li a5, RAT_ECHO_ALERT_SPEED
     j move_rat_towards_player
 
 update_enemy_mutant:
@@ -412,92 +411,174 @@ update_enemy_mutant:
     j move_rat_towards_player
 
 update_enemy_spitter:
-    # Incrementa enemy_attack_timer[indice]
+    la t0, enemy_x
+    add t4, t0, t3
+    lw a0, 0(t4)
+
+    la t0, enemy_y
+    add t4, t0, t3
+    lw a1, 0(t4)
+
+    la t0, player_x
+    lw a2, 0(t0)
+
+    la t0, player_y
+    lw a3, 0(t0)
+
+    sub t5, a2, a0
+    bgez t5, spitter_dx_abs_ok
+    sub t5, zero, t5
+
+spitter_dx_abs_ok:
+    sub t6, a3, a1
+    bgez t6, spitter_dy_abs_ok
+    sub t6, zero, t6
+
+spitter_dy_abs_ok:
+    add a4, t5, t6
+
+    li t6, SPITTER_MAX_RANGE
+    bgt a4, t6, spitter_approach
+
+    li t6, SPITTER_MIN_RANGE
+    blt a4, t6, spitter_retreat
+
+    call spitter_strafe
+
+    li t6, SPITTER_PROJECTILE_RANGE
+    bgt a4, t6, next_update_enemy
+
     la t0, enemy_attack_timer
     add t4, t0, t3
     lw t5, 0(t4)
-
     addi t5, t5, 1
-
     li t6, SPITTER_SHOOT_DELAY
-    blt t5, t6, store_spitter_timer
-
+    blt t5, t6, spitter_store_timer
     sw zero, 0(t4)
 
-    # Salva indice e offset antes de chamar spawn_enemy_bullet
     addi sp, sp, -8
     sw t1, 0(sp)
     sw t3, 4(sp)
 
-    # a0 = enemy_x + 4
+    call spitter_fire_at_player
+
+    lw t3, 4(sp)
+    lw t1, 0(sp)
+    addi sp, sp, 8
+    j next_update_enemy
+
+spitter_store_timer:
+    sw t5, 0(t4)
+    j next_update_enemy
+
+spitter_approach:
+    li a5, SPITTER_APPROACH_SPEED
+    j move_rat_towards_player
+
+spitter_retreat:
+    la t0, enemy_x
+    add t4, t0, t3
+    lw t5, 0(t4)
+    la t0, player_x
+    lw t6, 0(t0)
+    blt t5, t6, spitter_back_left
+
+spitter_back_right:
+    addi t5, t5, SPITTER_RETREAT_SPEED
+    sw t5, 0(t4)
+    j next_update_enemy
+
+spitter_back_left:
+    addi t5, t5, -2
+    sw t5, 0(t4)
+    j next_update_enemy
+
+spitter_strafe:
+    la t0, frame_counter
+    lw t5, 0(t0)
+    andi t5, t5, 16
+    beqz t5, spitter_strafe_down
+
+spitter_strafe_up:
+    la t0, enemy_y
+    add t4, t0, t3
+    lw t5, 0(t4)
+    addi t5, t5, -1
+    li t6, 10
+    blt t5, t6, spitter_strafe_done
+    sw t5, 0(t4)
+    j spitter_strafe_done
+
+spitter_strafe_down:
+    la t0, enemy_y
+    add t4, t0, t3
+    lw t5, 0(t4)
+    addi t5, t5, SPITTER_STRAFE_SPEED
+    li t6, 225
+    bgt t5, t6, spitter_strafe_done
+    sw t5, 0(t4)
+
+spitter_strafe_done:
+    ret
+
+spitter_fire_at_player:
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
     la t0, enemy_x
     add t4, t0, t3
     lw a0, 0(t4)
     addi a0, a0, 4
 
-    # a1 = enemy_y + 4
     la t0, enemy_y
     add t4, t0, t3
     lw a1, 0(t4)
     addi a1, a1, 4
 
-    # Decide direcao simples do tiro comparando posicao do player e do inimigo
     la t0, player_x
     lw t5, 0(t0)
+    sub t5, t5, a0
+    mv t6, t5
+    bgez t6, spitter_fire_dx_abs_ok
+    sub t6, zero, t6
 
-    la t0, enemy_x
-    add t4, t0, t3
-    lw t6, 0(t4)
+spitter_fire_dx_abs_ok:
+    la t0, player_y
+    lw a3, 0(t0)
+    sub a3, a3, a1
+    mv a4, a3
+    bgez a4, spitter_fire_dy_abs_ok
+    sub a4, zero, a4
 
-    blt t5, t6, spitter_shoot_left
+spitter_fire_dy_abs_ok:
+    bgt t6, a4, spitter_fire_horizontal
 
-spitter_shoot_right:
+spitter_fire_vertical:
+    li a2, 0
+    li t6, ENEMY_BULLET_SPEED
+    bgez a3, spitter_fire_down
+    sub t6, zero, t6
+
+spitter_fire_down:
+    mv a3, t6
+    li a4, ENEMY_PROJECTILE_SPITTER
+    call spawn_enemy_bullet_typed
+    j end_spitter_fire_at_player
+
+spitter_fire_horizontal:
+    li a3, 0
     li a2, ENEMY_BULLET_SPEED
-    li a3, 0
-    call spawn_enemy_bullet
-    j end_spitter_shoot_call
+    bgez t5, spitter_fire_right
+    sub a2, zero, a2
 
-spitter_shoot_left:
-    li a2, -3
-    li a3, 0
-    call spawn_enemy_bullet
+spitter_fire_right:
+    li a4, ENEMY_PROJECTILE_SPITTER
+    call spawn_enemy_bullet_typed
 
-end_spitter_shoot_call:
-    lw t3, 4(sp)
-    lw t1, 0(sp)
-    addi sp, sp, 8
-
-    j next_update_enemy
-
-
-store_spitter_timer:
-    sw t5, 0(t4)
-
-    la t0, enemy_x
-    add t4, t0, t3
-    lw t5, 0(t4)
-
-    la t0, player_x
-    lw t6, 0(t0)
-
-    sub a0, t5, t6
-    li a1, 24
-    bgt a0, a1, next_update_enemy
-
-    li a1, -24
-    blt a0, a1, next_update_enemy
-
-    blt t5, t6, spitter_back_left
-
-spitter_back_right:
-    addi t5, t5, RAT_SPITTER_SPEED
-    sw t5, 0(t4)
-    j next_update_enemy
-
-spitter_back_left:
-    addi t5, t5, -1
-    sw t5, 0(t4)
-    j next_update_enemy
+end_spitter_fire_at_player:
+    lw ra, 0(sp)
+    addi sp, sp, 4
+    ret
 
 move_rat_towards_player:
     # mover x em direcao ao player_x

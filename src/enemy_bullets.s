@@ -4,15 +4,6 @@
 
 .text
 
-# ------------------------------------------------------------
-# init_enemy_bullets
-# Desativa todos os projeteis inimigos.
-#
-# Entrada: nenhuma
-# Saida: enemy_bullet_active zerado
-# Modifica: t0-t4
-# ------------------------------------------------------------
-
 init_enemy_bullets:
     li t1, 0
 
@@ -26,29 +17,21 @@ init_enemy_bullets_loop:
     add t4, t0, t3
     sw zero, 0(t4)
 
+    la t0, enemy_bullet_life
+    add t4, t0, t3
+    sw zero, 0(t4)
+
     addi t1, t1, 1
     j init_enemy_bullets_loop
 
 end_init_enemy_bullets:
     ret
 
-#------------------------------------------------------------
-# spawn_enemy_bullet
-# Cria um projetil inimigo no primeiro slot livre.
-#
-# Entrada:
-#   a0 = x inicial
-#   a1 = y inicial
-#   a2 = dx
-#   a3 = dy
-#
-# Saida:
-#   enemy_bullet_* preenchido no primeiro slot livre
-#
-# Modifica: t0-t6
-# ------------------------------------------------------------
-
 spawn_enemy_bullet:
+    li a4, ENEMY_PROJECTILE_SPITTER
+    j spawn_enemy_bullet_typed
+
+spawn_enemy_bullet_typed:
     li t1, 0
 
 find_free_enemy_bullet_loop:
@@ -60,49 +43,73 @@ find_free_enemy_bullet_loop:
     la t0, enemy_bullet_active
     add t4, t0, t3
     lw t5, 0(t4)
-
     beqz t5, create_enemy_bullet_here
 
     addi t1, t1, 1
     j find_free_enemy_bullet_loop
 
 create_enemy_bullet_here:
-    # ativo = 1
     li t5, ENEMY_BULLET_ACTIVE
     sw t5, 0(t4)
 
-    # x
     la t0, enemy_bullet_x
     add t6, t0, t3
     sw a0, 0(t6)
 
-    # y
     la t0, enemy_bullet_y
     add t6, t0, t3
     sw a1, 0(t6)
 
-    # dx
     la t0, enemy_bullet_dx
     add t6, t0, t3
     sw a2, 0(t6)
 
-    # dy
     la t0, enemy_bullet_dy
     add t6, t0, t3
     sw a3, 0(t6)
 
+    la t0, enemy_bullet_type
+    add t6, t0, t3
+    sw a4, 0(t6)
+
+    li t5, ENEMY_PROJECTILE_BOSS_HEAVY
+    beq a4, t5, create_boss_heavy_bullet
+
+create_spitter_bullet:
+    li t5, SPITTER_PROJECTILE_SIZE
+    la t0, enemy_bullet_size
+    add t6, t0, t3
+    sw t5, 0(t6)
+
+    li t5, SPITTER_PROJECTILE_DAMAGE
+    la t0, enemy_bullet_damage
+    add t6, t0, t3
+    sw t5, 0(t6)
+
+    li t5, SPITTER_PROJECTILE_LIFE
+    la t0, enemy_bullet_life
+    add t6, t0, t3
+    sw t5, 0(t6)
+    j end_spawn_enemy_bullet
+
+create_boss_heavy_bullet:
+    li t5, BOSS_PROJECTILE_SIZE
+    la t0, enemy_bullet_size
+    add t6, t0, t3
+    sw t5, 0(t6)
+
+    li t5, BOSS_PROJECTILE_DAMAGE
+    la t0, enemy_bullet_damage
+    add t6, t0, t3
+    sw t5, 0(t6)
+
+    li t5, BOSS_PROJECTILE_LIFE
+    la t0, enemy_bullet_life
+    add t6, t0, t3
+    sw t5, 0(t6)
+
 end_spawn_enemy_bullet:
     ret
-
-# ------------------------------------------------------------
-# update_enemy_bullets
-# Move projeteis inimigos ativos.
-# Desativa se sair da tela.
-#
-# Entrada: arrays enemy_bullet_*
-# Saida: posicoes atualizadas
-# Modifica: t0-t6
-# ------------------------------------------------------------
 
 update_enemy_bullets:
     la t0, game_state
@@ -128,52 +135,40 @@ update_enemy_bullets_loop:
 
     slli t3, t1, 2
 
-    # Se inativo, pula
     la t0, enemy_bullet_active
     add t4, t0, t3
     lw t5, 0(t4)
     beqz t5, next_enemy_bullet_update
 
-    # x = x + dx
+    la t0, enemy_bullet_life
+    add t4, t0, t3
+    lw t5, 0(t4)
+    addi t5, t5, -1
+    sw t5, 0(t4)
+    blez t5, deactivate_enemy_bullet
+
     la t0, enemy_bullet_x
     add t4, t0, t3
     lw t5, 0(t4)
-
     la t0, enemy_bullet_dx
     add t6, t0, t3
     lw t6, 0(t6)
-
     add t5, t5, t6
-
-    # se x < 0, desativa
     blt t5, zero, deactivate_enemy_bullet
-
-    # se x > 317, desativa
-    li t6, 317
+    li t6, 319
     bgt t5, t6, deactivate_enemy_bullet
-
-    # salva x
     sw t5, 0(t4)
 
-    # y = y + dy
     la t0, enemy_bullet_y
     add t4, t0, t3
     lw t5, 0(t4)
-
     la t0, enemy_bullet_dy
     add t6, t0, t3
     lw t6, 0(t6)
-
     add t5, t5, t6
-
-    # se y < 0, desativa
     blt t5, zero, deactivate_enemy_bullet
-
-    # se y > 237, desativa
-    li t6, 237
+    li t6, 239
     bgt t5, t6, deactivate_enemy_bullet
-
-    # salva y
     sw t5, 0(t4)
 
     j next_enemy_bullet_update

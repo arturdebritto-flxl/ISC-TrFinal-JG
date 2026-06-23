@@ -235,6 +235,9 @@ collect_normal_ammo:
     lw t5, 0(t0)
     addi t5, t5, NORMAL_AMMO_GAIN
     sw t5, 0(t0)
+    j play_powerup_collect_sfx
+
+finish_collect_normal_ammo:
     j next_powerup_collision
 
 collect_heal:
@@ -242,6 +245,9 @@ collect_heal:
     lw t5, 0(t0)
     addi t5, t5, HEAL_GAIN
     sw t5, 0(t0)
+    j play_powerup_collect_sfx
+
+finish_collect_heal:
     j next_powerup_collision
 
 collect_boss_weapon:
@@ -253,6 +259,9 @@ collect_boss_weapon:
     lw t5, 0(t0)
     addi t5, t5, BOSS_AMMO_GAIN
     sw t5, 0(t0)
+    j play_powerup_collect_sfx
+
+finish_collect_boss_weapon:
     j next_powerup_collision
 
 collect_boss_ammo:
@@ -260,6 +269,18 @@ collect_boss_ammo:
     lw t5, 0(t0)
     addi t5, t5, BOSS_AMMO_GAIN
     sw t5, 0(t0)
+    j play_powerup_collect_sfx
+
+finish_collect_boss_ammo:
+    j next_powerup_collision
+
+play_powerup_collect_sfx:
+    li a0, 84
+    li a1, 70
+    li a2, 10
+    li a3, 80
+    li a7, 31
+    ecall
 
 next_powerup_collision:
     addi t1, t1, 1
@@ -269,12 +290,20 @@ end_player_powerup_collisions:
     ret
 
 draw_powerups:
-    addi sp, sp, -4
+    addi sp, sp, -20
     sw ra, 0(sp)
 
-    call get_draw_base_address
-    mv t2, a0
+    li t0, USE_SPRITE_POWERUPS
+    bnez t0, draw_powerups_skip_base
 
+    call get_draw_base_address
+    sw a0, 4(sp)
+    j draw_powerups_begin_loop
+
+draw_powerups_skip_base:
+    sw zero, 4(sp)
+
+draw_powerups_begin_loop:
     li t1, 0
 
 draw_powerups_loop:
@@ -296,55 +325,73 @@ draw_powerups_loop:
     add t5, t0, t4
     lw a3, 0(t5)
 
+    blt a2, zero, next_draw_powerup
+    li t6, POWERUP_SIZE
+    add a0, a2, t6
+    li t6, SCREEN_WIDTH
+    bgt a0, t6, next_draw_powerup
+
+    blt a3, zero, next_draw_powerup
+    li t6, POWERUP_SIZE
+    add a0, a3, t6
+    li t6, SCREEN_HEIGHT
+    bgt a0, t6, next_draw_powerup
+
     la t0, powerup_type
     add t5, t0, t4
     lw t6, 0(t5)
 
-    li a4, 0x3F
+    sw t1, 8(sp)
+    sw a2, 12(sp)
+    sw a3, 16(sp)
+
+    li t5, USE_SPRITE_POWERUPS
+    beqz t5, draw_powerup_fallback_rect
+
     li t5, POWERUP_HEAL
-    beq t6, t5, powerup_color_heal
+    beq t6, t5, select_powerup_heal_sprite
 
     li t5, POWERUP_BOSS_WEAPON
-    beq t6, t5, powerup_color_boss_weapon
+    beq t6, t5, select_powerup_boss_weapon_sprite
 
     li t5, POWERUP_BOSS_AMMO
-    beq t6, t5, powerup_color_boss_ammo
+    beq t6, t5, select_powerup_boss_ammo_sprite
 
-    j draw_powerup_square
+select_powerup_ammo_sprite:
+    la a2, sprite_powerup_ammo
+    j draw_selected_powerup_sprite
 
-powerup_color_heal:
-    li a4, 0xE0
-    j draw_powerup_square
+select_powerup_heal_sprite:
+    la a2, sprite_powerup_heal
+    j draw_selected_powerup_sprite
 
-powerup_color_boss_weapon:
-    li a4, 0xC4
-    j draw_powerup_square
+select_powerup_boss_weapon_sprite:
+    la a2, sprite_powerup_boss_weapon
+    j draw_selected_powerup_sprite
 
-powerup_color_boss_ammo:
-    li a4, 0xF8
+select_powerup_boss_ammo_sprite:
+    la a2, sprite_powerup_boss_ammo
 
-draw_powerup_square:
-    li t5, 0
+draw_selected_powerup_sprite:
+    lw a0, 12(sp)
+    lw a1, 16(sp)
+    li a3, POWERUP_SIZE
+    li a4, POWERUP_SIZE
+    call draw_sprite_8bpp_fast
 
-powerup_row_loop:
-    li t6, 0
-    add a0, a3, t5
-    slli a1, a0, 8
-    slli a0, a0, 6
-    add a1, a1, a0
-    add a1, a1, a2
-    add a1, a1, t2
+    lw t1, 8(sp)
+    j next_draw_powerup
 
-powerup_col_loop:
-    add a0, a1, t6
-    sb a4, 0(a0)
-    addi t6, t6, 1
-    li a0, POWERUP_SIZE
-    blt t6, a0, powerup_col_loop
+draw_powerup_fallback_rect:
+    lw a0, 12(sp)
+    lw a1, 16(sp)
+    li a2, POWERUP_SIZE
+    li a3, POWERUP_SIZE
+    li a4, 0xE7
+    lw a5, 4(sp)
+    call draw_rect
 
-    addi t5, t5, 1
-    li a0, POWERUP_SIZE
-    blt t5, a0, powerup_row_loop
+    lw t1, 8(sp)
 
 next_draw_powerup:
     addi t1, t1, 1
@@ -352,5 +399,5 @@ next_draw_powerup:
 
 end_draw_powerups:
     lw ra, 0(sp)
-    addi sp, sp, 4
+    addi sp, sp, 20
     ret
