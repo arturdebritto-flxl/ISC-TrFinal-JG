@@ -489,7 +489,7 @@ draw_inventory_text_fields:
     la a0, label_arma
     li a1, 8
     li a2, 216
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -497,14 +497,14 @@ draw_inventory_text_fields:
     lw a0, 0(t0)
     li a1, 30
     li a2, 216
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     la a0, label_municao
     li a1, 48
     li a2, 216
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -523,14 +523,14 @@ draw_mag_ammo_value:
     lw a0, 0(t0)
     li a1, 82
     li a2, 216
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     li a0, '/'
     li a1, 98
     li a2, 216
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_char
 
@@ -556,14 +556,14 @@ draw_shotgun_total_ammo:
 draw_total_ammo_value:
     li a1, 102
     li a2, 216
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     la a0, label_boss
     li a1, 8
     li a2, 224
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -571,14 +571,14 @@ draw_total_ammo_value:
     lw a0, 0(t0)
     li a1, 30
     li a2, 224
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     la a0, label_cura
     li a1, 64
     li a2, 224
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -586,14 +586,14 @@ draw_total_ammo_value:
     lw a0, 0(t0)
     li a1, 86
     li a2, 224
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     la a0, label_rec
     li a1, 120
     li a2, 224
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -612,7 +612,7 @@ draw_reload_timer_value:
     lw a0, 0(t0)
     li a1, 138
     li a2, 224
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 

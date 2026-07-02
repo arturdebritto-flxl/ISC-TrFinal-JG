@@ -387,7 +387,7 @@ draw_powerup_fallback_rect:
     lw a1, 16(sp)
     li a2, POWERUP_SIZE
     li a3, POWERUP_SIZE
-    li a4, 0xE7
+    li a4, COLOR_POWERUP_FALLBACK
     lw a5, 4(sp)
     call draw_rect
 

@@ -1,0 +1,2426 @@
+{
+  "format": "RARS16 Custom1 BGR233 direct 8bpp (BBGGGRRR)",
+  "formula": "alpha == 0 ? 0 : max(1, ((blue >> 6) << 6) | ((green >> 5) << 3) | (red >> 5))",
+  "runtime_sprites": [
+    {
+      "content_size": [
+        12,
+        16
+      ],
+      "crop": [
+        30,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        2,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "ffb02e243569d16eb6b6aa91de9fb311f52e38cdf506322e19464a91650b5425",
+      "resampling": "nearest",
+      "source": "sprite_00.png",
+      "source_sha256": "80b737598333d2c937a38df90476435ad0e0a6532e2aecaf7ba8df35d528b5e5",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_player_down_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        14,
+        16
+      ],
+      "crop": [
+        20,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        1,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "6b6e63a4b3ae9d820d85bfd3baf27d24077670378764e48220b4ce250290672c",
+      "resampling": "nearest",
+      "source": "sprite_01.png",
+      "source_sha256": "e653d6021ef8c7c6246c4b44041a71c7782ff8a5453ca0244e9eaff134447762",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_player_down_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        12,
+        16
+      ],
+      "crop": [
+        30,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        2,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "f78c2ebafdcc18e7245126d12155f757f412cbe4a84e37c253d64484ca9c4bc8",
+      "resampling": "nearest",
+      "source": "sprite_04.png",
+      "source_sha256": "310bd396e403996aa439c6b52064566bf44326dd0bebe3583c73f95837d345a8",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_player_up_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        12,
+        16
+      ],
+      "crop": [
+        30,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        2,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "af97eb458440b9d8aec3b4514d34f5ae7e1fe969ad257a94fcc28824d1817edb",
+      "resampling": "nearest",
+      "source": "sprite_05.png",
+      "source_sha256": "cf145f60b55a1f28b01c94a0c6da02e17f601ae934eb2f6ff170db57df786a5d",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_player_up_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        10,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        3,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "5a4d4311df9d90604417d92876eee20ca6d10ddca20b0d308eaec13053c66f86",
+      "resampling": "nearest",
+      "source": "sprite_08.png",
+      "source_sha256": "ecece14f9af545074b45296278e4dd26e1128289b8da0250930dc57a202da30e",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_player_left_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        160,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "b05eb25b9f1a01e2410276a65d1e2f2e9ccfc83308841db6bd0f9dc6cb3132c5",
+      "resampling": "nearest",
+      "source": "sprite_09.png",
+      "source_sha256": "93ba18b358beda3b93cb399d7fa0ef9b7e0592ce0944adb24b552468e41989ea",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_player_left_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        10,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        3,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "727fccccb61c3c15705b3f4914b65ce153e6cd06b34cc7c109616b15dbcc07ca",
+      "resampling": "nearest",
+      "source": "sprite_16.png",
+      "source_sha256": "874908b1e8942251f6873920dee5a034f6b7bf17bdd0fe137d4505f198011ad5",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_player_right_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        0,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "4a10d66c716cfbfdb66f2de4d6d1494be6b85061f985c6cec6e2db2b98e46294",
+      "resampling": "nearest",
+      "source": "sprite_17.png",
+      "source_sha256": "72ebaabafe751f2344d6725b8c383b190aaf39d06b732cd0dc6fa23070ddb317",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_player_right_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "efba1895bb7c50e42f401e92b7ca367ad925cd2ad4acfa02344ba7e5cbe8bd75",
+      "resampling": "nearest",
+      "source": "sprites/image-1.png.png",
+      "source_sha256": "377c1c2504af8772f52d283ebe6f26edec42c6df5ba1b3f2429d0ecba34db903",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_enemy_common_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "36075844447ab33eabb467887597aa171f97d9608381041e70234ff2edc97752",
+      "resampling": "nearest",
+      "source": "sprites/image-2.png.png",
+      "source_sha256": "3d9c25eff8adb73690aebc1924c0abee60bc3d6c6a24e093a161dd52463b9da2",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_enemy_common_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        50,
+        0,
+        120,
+        150
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "86b000407f596a4e4d39a0d197074328182cd3f5b4a7ec86d0c3122ced7e023d",
+      "resampling": "nearest",
+      "source": "sprites/image-12.png.png",
+      "source_sha256": "252e0a050b944fbfcec40ad069efe926703fb350e0c5fe39cd19ac13018d71b4",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_enemy_echo_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        40,
+        10,
+        110,
+        160
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "d9dddc7b7ccfe12e3e0eef1578ac7bc4537893165364e8e53f30640016dfeb70",
+      "resampling": "nearest",
+      "source": "sprites/image-13.png.png",
+      "source_sha256": "abff406d03d014aeb55fbe95db7d292ad37c87c05b6f2705074400a6206befea",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_enemy_echo_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "3a8dd346ff99ec56eb800da353f71fc24b189ae702ccf44553d5a4405c479ff9",
+      "resampling": "nearest",
+      "source": "sprites/image-10.png.png",
+      "source_sha256": "1cb82a8e14fd9f92b8e8b6ceaa4df28d61139936e1455c45766d540578c57d7b",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_enemy_mutant_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "3a8dd346ff99ec56eb800da353f71fc24b189ae702ccf44553d5a4405c479ff9",
+      "resampling": "nearest",
+      "source": "sprites/image-11.png.png",
+      "source_sha256": "1cb82a8e14fd9f92b8e8b6ceaa4df28d61139936e1455c45766d540578c57d7b",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_enemy_mutant_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        50,
+        0,
+        120,
+        150
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "e1864048ba5a276448ed9925cfc1cd24a0af81ae5593f24bbe32cd393926a7e3",
+      "resampling": "nearest",
+      "source": "sprites/image-18.png.png",
+      "source_sha256": "f25775f9dcb392b2cac82c0bd13bccf13ce7e4997a53d7e8cba538380503e0e5",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_enemy_spitter_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        40,
+        10,
+        110,
+        160
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "dbed7c95c07f5a4c5cf388258eac0034571a67e54e4a2661e8411ec574d29453",
+      "resampling": "nearest",
+      "source": "sprites/image-19.png.png",
+      "source_sha256": "00eb5d80f301cc50134481e0f5aee5269f853a38cc57ee03b8e726cfaad8d4d3",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_enemy_spitter_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        32,
+        32
+      ],
+      "crop": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "payload_sha256": "d786523201560aa2cfb416b9e6224812f34915be95d23e7cebcbcb6f0d83709d",
+      "resampling": "nearest",
+      "source": "sprites/New Piskel-1.png.png",
+      "source_sha256": "665da7d300214da91bfbe9ab9d977b0d9ef554d095d3d7a71522a795b6f2a5cd",
+      "source_size": [
+        320,
+        320
+      ],
+      "symbol": "sprite_boss_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        32,
+        32
+      ],
+      "crop": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        32,
+        32
+      ],
+      "payload_sha256": "d2fc0753905858e82170455d3b74ec5981294cdddbf35d40ef3b244b708a8d2b",
+      "resampling": "nearest",
+      "source": "sprites/New Piskel-2.png.png",
+      "source_sha256": "9a631843743f5064790e09bd613e062b192b64b735de81e633e51ff8986a89bb",
+      "source_size": [
+        320,
+        320
+      ],
+      "symbol": "sprite_boss_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        16
+      ],
+      "crop": [
+        0,
+        0,
+        160,
+        160
+      ],
+      "group": "_med_kit",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "63d6adf597134ede7a7577519c45f4ada62def8a0dbe6770f2300fbd4506216b",
+      "resampling": "nearest",
+      "source": "Med-Kit.png",
+      "source_sha256": "205f0eb128f08cb930dca63706d49d27a34667f0b107e025318e321140463ef3",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "sprite_powerup_heal",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        0,
+        10,
+        60,
+        50
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "46cf46b81baadfc3a75bc547c8f41c033c5ab611006507283d789940b7394fd8",
+      "resampling": "nearest",
+      "source": "sprite_1.png",
+      "source_sha256": "168aac0a194a8bb481f96645c1fa5158cb10b18cd06974d58a8dd8f42042ba99",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "sprite_powerup_ammo",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        16
+      ],
+      "crop": [
+        0,
+        0,
+        60,
+        60
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "9208c4464d4941c83bc9f0222aaf640e1afb3c23dbd2a4378f4b3677e08f74df",
+      "resampling": "nearest",
+      "source": "sprite_0.png",
+      "source_sha256": "7271d57bcd50618f0a6e13f16a2bf9d42baf29f70873a7e4a100a58883498d73",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "sprite_powerup_boss_weapon",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        8,
+        16
+      ],
+      "crop": [
+        20,
+        10,
+        40,
+        50
+      ],
+      "group": "_armas",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "c8ec61b3f9911afa918491252ab146aa12983810ce0fcb695cc8cb3e3539dfb9",
+      "resampling": "nearest",
+      "source": "sprite_5.png",
+      "source_sha256": "2986efd3dc6195e3ff65a003e25bb57f1bcaed1c90976f111d5842dcff0500f1",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "sprite_powerup_boss_ammo",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        16
+      ],
+      "crop": [
+        0,
+        0,
+        60,
+        60
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "9208c4464d4941c83bc9f0222aaf640e1afb3c23dbd2a4378f4b3677e08f74df",
+      "resampling": "nearest",
+      "source": "sprite_0.png",
+      "source_sha256": "7271d57bcd50618f0a6e13f16a2bf9d42baf29f70873a7e4a100a58883498d73",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "sprite_weapon_normal_icon",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        0,
+        10,
+        60,
+        50
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "d31b5af147fe6b8ece329de4dfdd06ee88c5acc64495d0f110f73851b64686fc",
+      "resampling": "nearest",
+      "source": "sprite_4.png",
+      "source_sha256": "dfb4a1ab668f18948bbb769da9a6c6faebacdcd22e2cc3b4b35415dacd8ff8fd",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "sprite_weapon_shotgun_icon",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        0,
+        10,
+        60,
+        50
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "7aef8651de4ed420b6ec7eaa99cf25d0faac281b2b56b1d1212c4f798a918ba1",
+      "resampling": "nearest",
+      "source": "sprite_2.png",
+      "source_sha256": "de8cda174c3a730f856bf0126e5d56a23cb66c7a72f9926bac26146383bc5adf",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "sprite_weapon_boss_icon",
+      "transparent_value": 0
+    }
+  ],
+  "sprites": [
+    {
+      "content_size": [
+        16,
+        16
+      ],
+      "crop": [
+        0,
+        0,
+        60,
+        60
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "9208c4464d4941c83bc9f0222aaf640e1afb3c23dbd2a4378f4b3677e08f74df",
+      "resampling": "nearest",
+      "source": "sprite_0.png",
+      "source_sha256": "7271d57bcd50618f0a6e13f16a2bf9d42baf29f70873a7e4a100a58883498d73",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "asset__armas_sprite_0",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        0,
+        10,
+        60,
+        50
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "46cf46b81baadfc3a75bc547c8f41c033c5ab611006507283d789940b7394fd8",
+      "resampling": "nearest",
+      "source": "sprite_1.png",
+      "source_sha256": "168aac0a194a8bb481f96645c1fa5158cb10b18cd06974d58a8dd8f42042ba99",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "asset__armas_sprite_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        0,
+        10,
+        60,
+        50
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "7aef8651de4ed420b6ec7eaa99cf25d0faac281b2b56b1d1212c4f798a918ba1",
+      "resampling": "nearest",
+      "source": "sprite_2.png",
+      "source_sha256": "de8cda174c3a730f856bf0126e5d56a23cb66c7a72f9926bac26146383bc5adf",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "asset__armas_sprite_2",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        0,
+        10,
+        60,
+        50
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "d527139c359032777ebe0366a652d7852a3e70d722b9688d23756eb435f54f54",
+      "resampling": "nearest",
+      "source": "sprite_3.png",
+      "source_sha256": "e1855475d9042ea7473a5b715d25b018bc5637ef59d6af54659da26045e15ab3",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "asset__armas_sprite_3",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        0,
+        10,
+        60,
+        50
+      ],
+      "group": "_armas",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "d31b5af147fe6b8ece329de4dfdd06ee88c5acc64495d0f110f73851b64686fc",
+      "resampling": "nearest",
+      "source": "sprite_4.png",
+      "source_sha256": "dfb4a1ab668f18948bbb769da9a6c6faebacdcd22e2cc3b4b35415dacd8ff8fd",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "asset__armas_sprite_4",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        8,
+        16
+      ],
+      "crop": [
+        20,
+        10,
+        40,
+        50
+      ],
+      "group": "_armas",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "c8ec61b3f9911afa918491252ab146aa12983810ce0fcb695cc8cb3e3539dfb9",
+      "resampling": "nearest",
+      "source": "sprite_5.png",
+      "source_sha256": "2986efd3dc6195e3ff65a003e25bb57f1bcaed1c90976f111d5842dcff0500f1",
+      "source_size": [
+        60,
+        60
+      ],
+      "symbol": "asset__armas_sprite_5",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        16
+      ],
+      "crop": [
+        0,
+        0,
+        160,
+        160
+      ],
+      "group": "_med_kit",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "63d6adf597134ede7a7577519c45f4ada62def8a0dbe6770f2300fbd4506216b",
+      "resampling": "nearest",
+      "source": "Med-Kit.png",
+      "source_sha256": "205f0eb128f08cb930dca63706d49d27a34667f0b107e025318e321140463ef3",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__med_kit_med_kit",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        12,
+        16
+      ],
+      "crop": [
+        30,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        2,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "ffb02e243569d16eb6b6aa91de9fb311f52e38cdf506322e19464a91650b5425",
+      "resampling": "nearest",
+      "source": "sprite_00.png",
+      "source_sha256": "80b737598333d2c937a38df90476435ad0e0a6532e2aecaf7ba8df35d528b5e5",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_00",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        14,
+        16
+      ],
+      "crop": [
+        20,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        1,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "6b6e63a4b3ae9d820d85bfd3baf27d24077670378764e48220b4ce250290672c",
+      "resampling": "nearest",
+      "source": "sprite_01.png",
+      "source_sha256": "e653d6021ef8c7c6246c4b44041a71c7782ff8a5453ca0244e9eaff134447762",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_01",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        14,
+        16
+      ],
+      "crop": [
+        20,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        1,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "3897a031d7bc57c6cd88a9e3c22d6c4030c2c208666f185bf2ebb4dec8317d07",
+      "resampling": "nearest",
+      "source": "sprite_02.png",
+      "source_sha256": "e628e83316a78ac1e0da3a3f128df62c378159944e243576eeb55e9b18f0c787",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_02",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        14,
+        16
+      ],
+      "crop": [
+        20,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        1,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "8b4a558dd802b4f98e0819643423a4e5dcc9b5abf01865bd90d18ef8b8b0b54f",
+      "resampling": "nearest",
+      "source": "sprite_03.png",
+      "source_sha256": "d9887bf0e0617193eb54fc10c0408fd993cb9b7bfde0af14a4ede885913e663b",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_03",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        12,
+        16
+      ],
+      "crop": [
+        30,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        2,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "f78c2ebafdcc18e7245126d12155f757f412cbe4a84e37c253d64484ca9c4bc8",
+      "resampling": "nearest",
+      "source": "sprite_04.png",
+      "source_sha256": "310bd396e403996aa439c6b52064566bf44326dd0bebe3583c73f95837d345a8",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_04",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        12,
+        16
+      ],
+      "crop": [
+        30,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        2,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "af97eb458440b9d8aec3b4514d34f5ae7e1fe969ad257a94fcc28824d1817edb",
+      "resampling": "nearest",
+      "source": "sprite_05.png",
+      "source_sha256": "cf145f60b55a1f28b01c94a0c6da02e17f601ae934eb2f6ff170db57df786a5d",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_05",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        12,
+        16
+      ],
+      "crop": [
+        30,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        2,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "9c83d02afa513fd60a16881040312f9d0f124e7fe5d948d8c16d9f95513540f3",
+      "resampling": "nearest",
+      "source": "sprite_06.png",
+      "source_sha256": "a55667b8dbb574ae92b3bddc499a4ca570cd3eb6c1b89f40a1ee26bf70ed2c46",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_06",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        12,
+        16
+      ],
+      "crop": [
+        30,
+        30,
+        130,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        2,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "f9fb22f25f7d3744340a464f259a32478d8243e163714a97bef8476b37b381ed",
+      "resampling": "nearest",
+      "source": "sprite_07.png",
+      "source_sha256": "f00181e8ec56ad399613e8fb965648facbac112ca15c89d91e317fe7e97bfe93",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_07",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        10,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        3,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "5a4d4311df9d90604417d92876eee20ca6d10ddca20b0d308eaec13053c66f86",
+      "resampling": "nearest",
+      "source": "sprite_08.png",
+      "source_sha256": "ecece14f9af545074b45296278e4dd26e1128289b8da0250930dc57a202da30e",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_08",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        160,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "b05eb25b9f1a01e2410276a65d1e2f2e9ccfc83308841db6bd0f9dc6cb3132c5",
+      "resampling": "nearest",
+      "source": "sprite_09.png",
+      "source_sha256": "93ba18b358beda3b93cb399d7fa0ef9b7e0592ce0944adb24b552468e41989ea",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_09",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        160,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "66c5160cebd20ddb9ed3577382d02cfe5fa645bfa25e75f25856f6dc7991b154",
+      "resampling": "nearest",
+      "source": "sprite_10.png",
+      "source_sha256": "80dbc182c9819f7c8ab28633d5fa356d5c32515eb26cd70ee6d68a431cf2a199",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_10",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        160,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "20ad97dc1e9c17910f2eb3903a05c69c1efd1a6e6cc7eb2c60e5bf233d2ef834",
+      "resampling": "nearest",
+      "source": "sprite_11.png",
+      "source_sha256": "40ea42518a8ba64404b52abd3a5429e6df55146854469d433f21cdfbe1e0e4e8",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_11",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        10,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        3,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "fa7ee544c0f668f36e0236bd2f896fc0101613d91aad67e342027ed6578a8627",
+      "resampling": "nearest",
+      "source": "sprite_12.png",
+      "source_sha256": "5d0f1e5c138d605679acfc00f21bc0659db0dad7e578ccca552978f29deb2e7b",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_12",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        160,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "8ae527624887c40720d17401d29ea064c7a1dba34fb804a45caf97681b292c8b",
+      "resampling": "nearest",
+      "source": "sprite_13.png",
+      "source_sha256": "ae38ab6a40e8b3b47410dc02cc4f761bede31c7a63033287d95689c555c618a8",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_13",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        160,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "38e79b69041722e1492b1c69e3712300d99b0685c95774312c716e1e1178f4cd",
+      "resampling": "nearest",
+      "source": "sprite_14.png",
+      "source_sha256": "9b71f7283a64c5708a06a13bc86f3bb6ebf55262c695e7b2c295abc12e53bfae",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_14",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        160,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "4ec2d8155ca55fa8db0ddb62aa39f746ad03dab8a59e09ec83009df920f4070d",
+      "resampling": "nearest",
+      "source": "sprite_15.png",
+      "source_sha256": "c0bfbd7d6931ce70f2e39d554b3f79c6253f342a0c882def69a8aeea5898f205",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_15",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        10,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        3,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "727fccccb61c3c15705b3f4914b65ce153e6cd06b34cc7c109616b15dbcc07ca",
+      "resampling": "nearest",
+      "source": "sprite_16.png",
+      "source_sha256": "874908b1e8942251f6873920dee5a034f6b7bf17bdd0fe137d4505f198011ad5",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_16",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        0,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "4a10d66c716cfbfdb66f2de4d6d1494be6b85061f985c6cec6e2db2b98e46294",
+      "resampling": "nearest",
+      "source": "sprite_17.png",
+      "source_sha256": "72ebaabafe751f2344d6725b8c383b190aaf39d06b732cd0dc6fa23070ddb317",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_17",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        0,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "472c6ef50ee74f563d7c3ecc7eb71cf4ffda237e76f70edfea649b9d6dd230b6",
+      "resampling": "nearest",
+      "source": "sprite_18.png",
+      "source_sha256": "6daf20c22ff72a42f8b3fdad57313355a82ff3115b800b5905bf73c72cb3df64",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_18",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        0,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "199507ff66f099a577708dfe1d2a5e50b228771306cadfa9466aaaa7a336f23b",
+      "resampling": "nearest",
+      "source": "sprite_19.png",
+      "source_sha256": "6da817fc9ad77879091f2839c86d0a9007f027b76e1eab09c7d2a8574046e5f4",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_19",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        10,
+        16
+      ],
+      "crop": [
+        40,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        3,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "71ddbcfd804f3ea01d9fe3354ead9205443b173897a61f857ff0e4667d7e645d",
+      "resampling": "nearest",
+      "source": "sprite_20.png",
+      "source_sha256": "fb17f14ed398ac67535d4cf0a3a62302525807bfe5cc287717420cf0635c0ec2",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_20",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        0,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "a4b9496792d29cd130cca436356d3f759c239955ed51bad856cb7a0709d52946",
+      "resampling": "nearest",
+      "source": "sprite_21.png",
+      "source_sha256": "d55ec0a2734403cd3dd8cfbec099bd665248cc32d0bf97fd771a0aa692fa0d90",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_21",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        0,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "d3003de7cc436b12bf6299e48efad5a38b4fc4c865511400b4a1a66fe44afe3f",
+      "resampling": "nearest",
+      "source": "sprite_22.png",
+      "source_sha256": "ee23f861b323cd9a21c1cf4d1a7cb9da85e4b42ecf313144be9abaa1b32169a8",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_22",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        15,
+        16
+      ],
+      "crop": [
+        0,
+        30,
+        120,
+        160
+      ],
+      "group": "_protagonista",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "71efc0575912d40233c4fc922289075fe90f63a6857462f383c4453e86634dfa",
+      "resampling": "nearest",
+      "source": "sprite_23.png",
+      "source_sha256": "de01529847bcd785621b5c63a05e40f4029a4ed8f19d32e5d59a4dd71feda3d7",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__protagonista_sprite_23",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        14,
+        10
+      ],
+      "crop": [
+        1,
+        4,
+        15,
+        14
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        1,
+        3
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "17a5c43eb2d78850169bf138ced27c79fbb6537bf2fbdef4276b6780b1a30a41",
+      "resampling": "nearest",
+      "source": "sprites/image-1.png (1).png",
+      "source_sha256": "568830a604734ca9c3a4fa0299d6d78fd62ac18f9f7d8700113a4804897f087c",
+      "source_size": [
+        16,
+        16
+      ],
+      "symbol": "asset__sprites_1_sprites_image_1_png_1",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "efba1895bb7c50e42f401e92b7ca367ad925cd2ad4acfa02344ba7e5cbe8bd75",
+      "resampling": "nearest",
+      "source": "sprites/image-1.png.png",
+      "source_sha256": "377c1c2504af8772f52d283ebe6f26edec42c6df5ba1b3f2429d0ecba34db903",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_1_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "3a8dd346ff99ec56eb800da353f71fc24b189ae702ccf44553d5a4405c479ff9",
+      "resampling": "nearest",
+      "source": "sprites/image-10.png.png",
+      "source_sha256": "1cb82a8e14fd9f92b8e8b6ceaa4df28d61139936e1455c45766d540578c57d7b",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_10_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "3a8dd346ff99ec56eb800da353f71fc24b189ae702ccf44553d5a4405c479ff9",
+      "resampling": "nearest",
+      "source": "sprites/image-11.png.png",
+      "source_sha256": "1cb82a8e14fd9f92b8e8b6ceaa4df28d61139936e1455c45766d540578c57d7b",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_11_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        50,
+        0,
+        120,
+        150
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "86b000407f596a4e4d39a0d197074328182cd3f5b4a7ec86d0c3122ced7e023d",
+      "resampling": "nearest",
+      "source": "sprites/image-12.png.png",
+      "source_sha256": "252e0a050b944fbfcec40ad069efe926703fb350e0c5fe39cd19ac13018d71b4",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_12_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        40,
+        10,
+        110,
+        160
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "d9dddc7b7ccfe12e3e0eef1578ac7bc4537893165364e8e53f30640016dfeb70",
+      "resampling": "nearest",
+      "source": "sprites/image-13.png.png",
+      "source_sha256": "abff406d03d014aeb55fbe95db7d292ad37c87c05b6f2705074400a6206befea",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_13_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "430f53e56b3ce4629629d61164fa158bef28a6b6cddaff16e656c69bd95c0a2f",
+      "resampling": "nearest",
+      "source": "sprites/image-14.png.png",
+      "source_sha256": "4e0bcb1b2bcb0594446ddb1a89da0e60747ea7edca72b28c5717c118a402e5b9",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_14_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "9e02c87b9d14c48f6c8cc7ef624604ba49248a50772dd5a76d79dd24d2d9a802",
+      "resampling": "nearest",
+      "source": "sprites/image-15.png.png",
+      "source_sha256": "19e0b4d6bfefbbdbdd44104900c9bec109dcb3e1eaa5b94192df7465d3b70a70",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_15_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "6454c1aa323caeb51955678692f166dd3b4bd62ceb2681abe0a828536e191023",
+      "resampling": "nearest",
+      "source": "sprites/image-16.png.png",
+      "source_sha256": "d0d5fed4853bc8fd62a54b5aa4ec0782dd4bbe5e97db045096cd3c868b9091f6",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_16_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "18c2d314b4e443937c997b93e2bf936e4acef8120cea1188c547e5b779a275be",
+      "resampling": "nearest",
+      "source": "sprites/image-17.png.png",
+      "source_sha256": "c1063c0886113c355ffaf0d8c87eea29d0d69842bfda4b9f0530240718638c1a",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_17_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        50,
+        0,
+        120,
+        150
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "e1864048ba5a276448ed9925cfc1cd24a0af81ae5593f24bbe32cd393926a7e3",
+      "resampling": "nearest",
+      "source": "sprites/image-18.png.png",
+      "source_sha256": "f25775f9dcb392b2cac82c0bd13bccf13ce7e4997a53d7e8cba538380503e0e5",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_18_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        40,
+        10,
+        110,
+        160
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "dbed7c95c07f5a4c5cf388258eac0034571a67e54e4a2661e8411ec574d29453",
+      "resampling": "nearest",
+      "source": "sprites/image-19.png.png",
+      "source_sha256": "00eb5d80f301cc50134481e0f5aee5269f853a38cc57ee03b8e726cfaad8d4d3",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_19_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "36075844447ab33eabb467887597aa171f97d9608381041e70234ff2edc97752",
+      "resampling": "nearest",
+      "source": "sprites/image-2.png.png",
+      "source_sha256": "3d9c25eff8adb73690aebc1924c0abee60bc3d6c6a24e093a161dd52463b9da2",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_2_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "85ae8008be7109ae5212fb01b32717c0764204fe729482eaf15dd94c9c495b39",
+      "resampling": "nearest",
+      "source": "sprites/image-3.png.png",
+      "source_sha256": "a8416f82904ca642cf3530904117932dad47ce8386d2cd7a2904688e48459b4a",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_3_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "f0eeafd91f73ca1c636ef198547eb3116e056a35b64206c74c6a57dc9192876e",
+      "resampling": "nearest",
+      "source": "sprites/image-4.png.png",
+      "source_sha256": "fc04f426f6d4a8f153bfb16ea49df1f84aacc342b48c994ab6349d7456063cc3",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_4_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        50,
+        0,
+        120,
+        150
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "0ec749704806530112256ff89eaf3c55a29c739e5f41f2794f1b60d3d9076dfe",
+      "resampling": "nearest",
+      "source": "sprites/image-5.png.png",
+      "source_sha256": "d5c0de557c1f9c78a29ec533fe3b8c9fb85d7a5a970e449c2d85ff90ae22d8a1",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_5_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        7,
+        16
+      ],
+      "crop": [
+        40,
+        10,
+        110,
+        160
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        4,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "46aa102ec148e72e71923082e728098aa4324a963e3bf7a064aa9305ed8f17b7",
+      "resampling": "nearest",
+      "source": "sprites/image-6.png.png",
+      "source_sha256": "a7cbd7c500d325be9665fd9abc04babf15c7ee3b337cf9db8699f1c64311bad7",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_6_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "96ec8ad25cfaab78794d7662272dadd3fc0feef57d2a3582cf4423a838fc2f0a",
+      "resampling": "nearest",
+      "source": "sprites/image-7.png.png",
+      "source_sha256": "8eda7efd570fd591c40a282f60f85ac1622cbb64ef6a79c57ded5d9fce3b5f9f",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_7_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "c6feb05747c8d0e9108d22ff21d3f2c491a36fb9a12edd0d24b7da1df810e899",
+      "resampling": "nearest",
+      "source": "sprites/image-8.png.png",
+      "source_sha256": "14b4d5bb6f1c559aeb20ef7c1152566764a825a33ea803815e2c96bffd247a8d",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_8_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        11
+      ],
+      "crop": [
+        10,
+        40,
+        150,
+        140
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        2
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "8747cb11b869bd8c7ce09343bde3b78a01f5dc321c3d8804debf20601fff6cbf",
+      "resampling": "nearest",
+      "source": "sprites/image-9.png.png",
+      "source_sha256": "69079d9243cefd75855597f07732d22d70bc2be9cba7b52bc40ea74516d4df24",
+      "source_size": [
+        160,
+        160
+      ],
+      "symbol": "asset__sprites_1_sprites_image_9_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        16
+      ],
+      "crop": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "a70eeecd7894ded82d1e1828cf538920afaae064431f030d1f3693d79ba67b91",
+      "resampling": "nearest",
+      "source": "sprites/New Piskel-1.png.png",
+      "source_sha256": "665da7d300214da91bfbe9ab9d977b0d9ef554d095d3d7a71522a795b6f2a5cd",
+      "source_size": [
+        320,
+        320
+      ],
+      "symbol": "asset__sprites_1_sprites_new_piskel_1_png",
+      "transparent_value": 0
+    },
+    {
+      "content_size": [
+        16,
+        16
+      ],
+      "crop": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "group": "_sprites_1",
+      "offset": [
+        0,
+        0
+      ],
+      "output_size": [
+        16,
+        16
+      ],
+      "payload_sha256": "8ecb69a026ade691314d28cc7505113e4fe0ff56d276fdc6b156ae731c7d410f",
+      "resampling": "nearest",
+      "source": "sprites/New Piskel-2.png.png",
+      "source_sha256": "9a631843743f5064790e09bd613e062b192b64b735de81e633e51ff8986a89bb",
+      "source_size": [
+        320,
+        320
+      ],
+      "symbol": "asset__sprites_1_sprites_new_piskel_2_png",
+      "transparent_value": 0
+    }
+  ]
+}

@@ -32,7 +32,7 @@ draw_hud:
     la a0, label_pts
     li a1, 8
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -40,14 +40,14 @@ draw_hud:
     lw a0, 0(t0)
     li a1, 26
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     la a0, label_vidas
     li a1, 56
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -55,14 +55,14 @@ draw_hud:
     lw a0, 0(t0)
     li a1, 80
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     la a0, label_fase
     li a1, 110
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -70,14 +70,14 @@ draw_hud:
     lw a0, 0(t0)
     li a1, 132
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     la a0, label_wave
     li a1, 158
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -85,14 +85,14 @@ draw_hud:
     lw a0, 0(t0)
     li a1, 180
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     la a0, label_rest
     li a1, 206
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -100,7 +100,7 @@ draw_hud:
     lw a0, 0(t0)
     li a1, 228
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
@@ -111,7 +111,7 @@ draw_hud:
     la a0, label_boss
     li a1, 260
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
@@ -119,7 +119,7 @@ draw_hud:
     lw a0, 0(t0)
     li a1, 282
     li a2, 8
-    li a3, 0xFF
+    li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 

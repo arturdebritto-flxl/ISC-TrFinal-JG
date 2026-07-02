@@ -40,6 +40,24 @@
 .eqv SCREEN_HEIGHT                240
 
 # ------------------------------------------------------------
+# Cores do Bitmap Display (BGR233: BBGGGRRR)
+# ------------------------------------------------------------
+
+.eqv COLOR_BLACK                  0x00
+.eqv COLOR_WHITE                  0xFF
+.eqv COLOR_SCENE_BORDER           0x09
+.eqv COLOR_TOWN_DETAIL            0x54
+.eqv COLOR_SEWER_DETAIL           0x38
+.eqv COLOR_LAB_PANEL              0x5B
+.eqv COLOR_LAB_DETAIL             0xA4
+.eqv COLOR_PLAYER_FALLBACK        0xAF
+.eqv COLOR_PLAYER_BULLET          0x3F
+.eqv COLOR_ENEMY_FALLBACK         0x52
+.eqv COLOR_ENEMY_BULLET           0x27
+.eqv COLOR_BOSS_FALLBACK          0x5B
+.eqv COLOR_POWERUP_FALLBACK       0x3F
+
+# ------------------------------------------------------------
 # Limites iniciais de entidades simultâneas
 # ------------------------------------------------------------
 
