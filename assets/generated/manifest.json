@@ -154,7 +154,7 @@
         160,
         160
       ],
-      "symbol": "sprite_player_left_0",
+      "symbol": "sprite_player_right_0",
       "transparent_value": 0
     },
     {
@@ -185,7 +185,7 @@
         160,
         160
       ],
-      "symbol": "sprite_player_left_1",
+      "symbol": "sprite_player_right_1",
       "transparent_value": 0
     },
     {
@@ -216,7 +216,7 @@
         160,
         160
       ],
-      "symbol": "sprite_player_right_0",
+      "symbol": "sprite_player_left_0",
       "transparent_value": 0
     },
     {
@@ -247,7 +247,7 @@
         160,
         160
       ],
-      "symbol": "sprite_player_right_1",
+      "symbol": "sprite_player_left_1",
       "transparent_value": 0
     },
     {

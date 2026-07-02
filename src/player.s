@@ -80,9 +80,6 @@ store_move_buffer:
     la t0, player_move_direction
     sw t1, 0(t0)
 
-    la t0, player_direction
-    sw t1, 0(t0)
-
     la t0, player_move_hold_timer
     li t2, PLAYER_MOVE_HOLD_FRAMES
     sw t2, 0(t0)
@@ -213,6 +210,37 @@ mark_player_moved:
 end_update_player:
     lw ra, 0(sp)
     addi sp, sp, 12
+    ret
+
+# ------------------------------------------------------------
+# update_player_facing_direction
+# Prioridade visual: tiro ativo, movimento no frame, ultima direcao.
+# Deve ser chamada depois de update_player e antes de consumir o
+# shoot_hold_timer do frame atual.
+# ------------------------------------------------------------
+
+update_player_facing_direction:
+    la t0, shoot_hold_timer
+    lw t1, 0(t0)
+    bgtz t1, face_shoot_direction
+
+    la t0, player_moved
+    lw t1, 0(t0)
+    beqz t1, end_update_player_facing_direction
+
+    la t0, player_move_direction
+    lw t1, 0(t0)
+    j store_player_facing_direction
+
+face_shoot_direction:
+    la t0, shoot_direction
+    lw t1, 0(t0)
+
+store_player_facing_direction:
+    la t0, player_direction
+    sw t1, 0(t0)
+
+end_update_player_facing_direction:
     ret
 
 is_player_position_blocked:

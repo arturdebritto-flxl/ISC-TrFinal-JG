@@ -118,6 +118,8 @@ store_shoot_buffer:
     sw t2, 0(t0)
 
 apply_shoot_buffer:
+    call update_player_facing_direction
+
     la t0, shoot_hold_timer
     lw t1, 0(t0)
     blez t1, end_check_shoot_input
