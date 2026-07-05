@@ -1,0 +1,1 @@
+"""Offline sprite preparation helpers."""

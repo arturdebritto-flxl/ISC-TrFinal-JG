@@ -1,0 +1,42 @@
+{
+  "assets/generated/manifest.json": {
+    "mtime": 1783054193.4382756,
+    "ast_hash": "fa63716550912b2120c757d3656891f7",
+    "semantic_hash": "fa63716550912b2120c757d3656891f7"
+  },
+  "tests/test_color_contracts.py": {
+    "mtime": 1782995366.0996664,
+    "ast_hash": "3373aa705c07535df2721776e1d4a573",
+    "semantic_hash": "3373aa705c07535df2721776e1d4a573"
+  },
+  "tests/test_convert_sprites.py": {
+    "mtime": 1783032230.5670009,
+    "ast_hash": "51f5b017e0ee24a2847ccce5bcd85ab0",
+    "semantic_hash": "51f5b017e0ee24a2847ccce5bcd85ab0"
+  },
+  "tests/test_player_facing_direction.py": {
+    "mtime": 1783053728.253256,
+    "ast_hash": "45505ee3b5c6d81d2f732d65f813245e",
+    "semantic_hash": "45505ee3b5c6d81d2f732d65f813245e"
+  },
+  "tests/test_selective_sprite_integration.py": {
+    "mtime": 1783053867.0409534,
+    "ast_hash": "5b672bee7d1232e2c13a954e9be4a430",
+    "semantic_hash": "5b672bee7d1232e2c13a954e9be4a430"
+  },
+  "tests/test_visual_regressions.py": {
+    "mtime": 1783053889.8855247,
+    "ast_hash": "19249aa079b66efbce328f2994f3b8f5",
+    "semantic_hash": "19249aa079b66efbce328f2994f3b8f5"
+  },
+  "tools/__init__.py": {
+    "mtime": 1782995366.101174,
+    "ast_hash": "1b0ea0649de901d048a3897d381fa4a8",
+    "semantic_hash": "1b0ea0649de901d048a3897d381fa4a8"
+  },
+  "tools/convert_sprites.py": {
+    "mtime": 1783053644.3110425,
+    "ast_hash": "72a282dcb12ae6b4a2f66e5bac26eabd",
+    "semantic_hash": "72a282dcb12ae6b4a2f66e5bac26eabd"
+  }
+}
