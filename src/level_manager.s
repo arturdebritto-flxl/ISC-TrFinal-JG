@@ -283,7 +283,7 @@ start_town_wave4:
 
 
 finish_town:
-    call set_state_level2
+    call set_state_cutscene_level2
     j end_advance_wave
 
 
@@ -370,7 +370,7 @@ start_sewer_wave5:
 
 
 finish_sewer:
-    call set_state_level3
+    call set_state_cutscene_level3
     j end_advance_wave
 
 

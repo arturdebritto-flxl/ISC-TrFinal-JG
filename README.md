@@ -1,13 +1,26 @@
-# Projeto Echo
+# Roedores: RISC of Infection
 
-Jogo em RISC-V Assembly para RARS16_Custom1.
+Jogo de sobrevivencia em RISC-V Assembly para RARS16_Custom1. O jogador enfrenta hordas de roedores infectados na cidade, no esgoto e no laboratorio ate a batalha final.
+
+O projeto usa Bitmap Display `320x240` com pixels BGR233 de 8 bits, double buffering e Keyboard Display MMIO (KDMMIO). PNGs sao convertidos offline; o runtime usa somente dados Assembly.
+
+## Requisitos
+
+- Java para executar o arquivo JAR.
+- RARS16_Custom1.
+- Bitmap Display em `320x240`, unidade `1x1`.
+- Keyboard Display MMIO conectado.
 
 ## Como validar
 
 ```powershell
-java -jar C:\Users\Usuario\Desktop\Rars16_Custom1.jar nc a main.s
-java -jar C:\Users\Usuario\Desktop\Rars16_Custom1.jar nc a test_progression.s
-java -jar C:\Users\Usuario\Desktop\Rars16_Custom1.jar nc me test_progression.s
+python -m unittest discover
+java -jar <RARS_JAR> nc a main.s
+java -jar <RARS_JAR> nc me main.s
+java -jar <RARS_JAR> nc a test_progression.s
+java -jar <RARS_JAR> nc me test_progression.s
+java -jar <RARS_JAR> nc me test_runtime_smoke.s
+java -jar <RARS_JAR> nc me test_final_adjustments.s
 ```
 
 ## RARS GUI
@@ -16,7 +29,7 @@ java -jar C:\Users\Usuario\Desktop\Rars16_Custom1.jar nc me test_progression.s
 - Use o RARS16_Custom1.
 - Conecte o Bitmap Display conforme o projeto da disciplina.
 - Conecte o KDMMIO para teclado.
-- No menu, `SPACE` ou `ENTER` chama o reset completo da partida e entra no level 1.
+- No menu, `SPACE` ou `ENTER` reinicia a partida e abre a primeira cutscene.
 
 ## Checklist manual RARS GUI
 
@@ -24,8 +37,7 @@ java -jar C:\Users\Usuario\Desktop\Rars16_Custom1.jar nc me test_progression.s
 - Conectar KDMMIO.
 - Abrir `main.s`.
 - Usar Run.
-- `SPACE` inicia.
-- `ENTER` inicia.
+- `SPACE` ou `ENTER` inicia e avanca cutscenes.
 - `WASD` move.
 - `IJKL` atira.
 - `H` cura.
@@ -44,11 +56,28 @@ java -jar C:\Users\Usuario\Desktop\Rars16_Custom1.jar nc me test_progression.s
 - `IJKL`: atirar.
 - `1`: selecionar rifle.
 - `2`: selecionar escopeta quando desbloqueada.
-- `SPACE` ou `ENTER`: iniciar no menu.
+- `3`: selecionar UZI quando desbloqueada.
+- `C` ou `c`: avancar para a proxima fase durante o gameplay (cheat de teste).
+- `SPACE` ou `ENTER`: iniciar no menu e avancar cutscenes.
 - `R`: recarregar a arma selecionada.
 - `E`: mostrar ou ocultar inventario.
 - `R` ou `T`: reiniciar em game over ou victory.
 - `H`: usar cura quando houver item.
+
+## Fases e cutscenes
+
+- Primeira cutscene: depois do menu, antes da cidade.
+- Segunda cutscene: entre a cidade e o esgoto.
+- Terceira cutscene: entre o esgoto e o laboratorio/boss.
+
+Durante cutscenes o gameplay fica suspenso. Somente `SPACE` ou `ENTER` avanca, e o input e limpo ao sair para evitar acionamento duplicado. As imagens opacas de `320x240` sao convertidas sem resize, suavizacao ou antialiasing por `tools/convert_cutscenes.py`; cada tela gera `76.800` bytes em `assets/generated/cutscenes.s`.
+
+## Power-ups e armas
+
+- Medkit: adiciona cura ao inventario.
+- Municoes: pickups separados para arma normal, shotgun e UZI.
+- Shotgun: o drop no chao desbloqueia a selecao pela tecla `2`.
+- UZI: o drop no chao desbloqueia a selecao pela tecla `3`, sem equipar automaticamente.
 
 ## Gameplay atual
 
@@ -69,7 +98,7 @@ java -jar C:\Users\Usuario\Desktop\Rars16_Custom1.jar nc me test_progression.s
 - `src/powerups.s`: power-ups coletaveis.
 - `src/inventory.s`: arma, municao normal, municao boss e cura.
 - `src/hud.s`: informacoes numericas de gameplay.
-- `src/screens.s`: menu, game over, victory e reset de partida.
+- `src/screens.s`: menu, cutscenes, game over, victory e reset de partida.
 - `src/level_manager.s`: progressao entre town, sewer, laboratory e boss.
 
 ## Integracao
@@ -82,6 +111,7 @@ Os desenhos principais usam sprites embutidos a partir dos assets do grupo. Para
 - `draw_inventory`
 - `draw_powerups`
 - `draw_menu_screen`
+- `draw_cutscene_screen`
 - `draw_game_over_screen`
 - `draw_victory_screen`
 - `begin_frame`

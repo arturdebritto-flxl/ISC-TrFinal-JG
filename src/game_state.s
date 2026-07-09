@@ -138,6 +138,29 @@ set_state_level3:
     ret
 
 # ------------------------------------------------------------
+# Estados de cutscene. A fase de destino e inicializada somente
+# quando o jogador avanca a tela com SPACE ou ENTER.
+# ------------------------------------------------------------
+
+set_state_cutscene_intro:
+    la t0, game_state
+    li t1, STATE_CUTSCENE_INTRO
+    sw t1, 0(t0)
+    ret
+
+set_state_cutscene_level2:
+    la t0, game_state
+    li t1, STATE_CUTSCENE_LEVEL2
+    sw t1, 0(t0)
+    ret
+
+set_state_cutscene_level3:
+    la t0, game_state
+    li t1, STATE_CUTSCENE_LEVEL3
+    sw t1, 0(t0)
+    ret
+
+# ------------------------------------------------------------
 # set_state_victory
 # Coloca o jogo no estado de vitoria.
 # ------------------------------------------------------------

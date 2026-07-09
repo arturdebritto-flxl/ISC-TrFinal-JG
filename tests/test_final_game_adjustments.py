@@ -1,4 +1,3 @@
-import re
 import unittest
 from pathlib import Path
 
@@ -89,13 +88,15 @@ class FinalGameAdjustmentTests(unittest.TestCase):
         )
 
     def test_final_title_uses_two_line_ascii_fallback(self) -> None:
-        self.assertIn('label_title_line1: .asciz "Roedores:"', self.render)
-        self.assertIn('label_title_line2: .asciz "RISC de Infeccao"', self.render)
+        self.assertIn('label_title_line1: .asciz "Roedores"', self.render)
+        self.assertIn('label_title_line2: .asciz "RISC of Infection"', self.render)
         self.assertNotIn("label_echo", self.render)
         menu = routine(self.render, "draw_menu_screen", "draw_game_over_screen")
         self.assertIn("label_title_line1", menu)
         self.assertIn("label_title_line2", menu)
         self.assertLess(menu.index("label_title_line1"), menu.index("label_title_line2"))
+        self.assertRegex(menu, r"label_title_line1[\s\S]*?li a1, 144")
+        self.assertRegex(menu, r"label_title_line2[\s\S]*?li a1, 126")
 
         draw_char = routine(self.render, "draw_small_char", "draw_small_text")
         self.assertRegex(draw_char, r"li t0, 'a'[\s\S]*?addi a0, a0, -32")

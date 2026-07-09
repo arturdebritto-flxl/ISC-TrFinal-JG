@@ -23,6 +23,50 @@ final_adjustments_fail: .asciz "final adjustments smoke: FAIL\n"
 
 main:
     call reset_game_run
+
+    # Cutscene ignora C/c e ENTER avanca sem reaproveitar o input.
+    call set_state_cutscene_intro
+    call begin_frame
+    call draw_cutscene_screen
+    call get_draw_base_address
+    lw t1, 0(a0)
+    la t0, cutscene_intro_pixels
+    lw t2, 0(t0)
+    bne t1, t2, fail_final_adjustments
+
+    li a0, 'c'
+    call press_cutscene_key
+    la t0, game_state
+    lw t1, 0(t0)
+    li t2, STATE_CUTSCENE_INTRO
+    bne t1, t2, fail_final_adjustments
+
+    li a0, 13
+    call press_cutscene_key
+    la t0, game_state
+    lw t1, 0(t0)
+    li t2, STATE_LEVEL1
+    bne t1, t2, fail_final_adjustments
+    la t0, key_pressed
+    lw t1, 0(t0)
+    bnez t1, fail_final_adjustments
+
+    call set_state_cutscene_level2
+    li a0, 32
+    call press_cutscene_key
+    la t0, game_state
+    lw t1, 0(t0)
+    li t2, STATE_LEVEL2
+    bne t1, t2, fail_final_adjustments
+
+    call set_state_cutscene_level3
+    li a0, 32
+    call press_cutscene_key
+    la t0, game_state
+    lw t1, 0(t0)
+    li t2, STATE_LEVEL3
+    bne t1, t2, fail_final_adjustments
+
     call set_state_level1
 
     # Tecla 3 nao equipa a UZI antes da coleta.
@@ -203,6 +247,14 @@ press_cheat_key:
     li t1, 1
     sw t1, 0(t0)
     j handle_next_level_cheat
+
+press_cutscene_key:
+    la t0, last_key
+    sw a0, 0(t0)
+    la t0, key_pressed
+    li t1, 1
+    sw t1, 0(t0)
+    j update_cutscene
 
 .include "src/game_state.s"
 .include "src/level_manager.s"

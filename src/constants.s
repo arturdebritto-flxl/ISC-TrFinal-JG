@@ -13,6 +13,9 @@
 .eqv STATE_BOSS                    3
 .eqv STATE_GAME_OVER               4
 .eqv STATE_VICTORY                 5
+.eqv STATE_CUTSCENE_INTRO          6
+.eqv STATE_CUTSCENE_LEVEL2         7
+.eqv STATE_CUTSCENE_LEVEL3         8
 
 # ------------------------------------------------------------
 # Identificação dos cenários

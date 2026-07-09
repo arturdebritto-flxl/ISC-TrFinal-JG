@@ -21,6 +21,7 @@ main:
     call simulate_wave_clear
     call simulate_wave_clear
     call simulate_wave_clear
+    call set_state_level2
 
     # Sewer: Wave 1 -> Wave 2 -> Wave 3 -> Wave 4 -> Wave 5 -> Laboratory
     call simulate_wave_clear
@@ -28,6 +29,7 @@ main:
     call simulate_wave_clear
     call simulate_wave_clear
     call simulate_wave_clear
+    call set_state_level3
 
     # Laboratory: Wave 1 -> Wave 2 -> Wave 3 -> Boss
     call simulate_wave_clear
@@ -130,6 +132,15 @@ simulate_wave_clear:
     lw ra, 0(sp)
     addi sp, sp, 4
 
+    ret
+
+# Dependencias do handler de cheat incluido em level_manager.s. Este teste
+# exercita somente progressao de waves, portanto os resets ficam como stubs.
+init_enemies:
+init_bullets:
+init_enemy_bullets:
+init_powerups:
+init_boss:
     ret
 
 .include "src/game_state.s"

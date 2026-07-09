@@ -23,6 +23,7 @@ FORMULA = (
 )
 
 FINAL_GROUP = "_final_sprites"
+NON_SPRITE_SOURCE_DIRS = {"cutscenes"}
 
 
 def build_runtime_sprites() -> dict[str, tuple[str, str, int]]:
@@ -172,6 +173,8 @@ def transform_exact(data: bytes, size: int) -> tuple[int, int, bytes, dict]:
 def discover(source_dir: Path) -> list[SourceEntry]:
     entries: list[SourceEntry] = []
     for source in sorted(source_dir.iterdir(), key=lambda path: path.name.casefold()):
+        if source.is_dir() and source.name.casefold() in NON_SPRITE_SOURCE_DIRS:
+            continue
         group = symbol_for("", Path(source.stem)).removeprefix("asset_")
         if source.is_dir():
             pngs = sorted(

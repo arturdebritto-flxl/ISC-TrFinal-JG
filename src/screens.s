@@ -45,7 +45,7 @@ start_new_game_from_menu:
     ecall
 
     call reset_game_run
-    call set_state_level1
+    call set_state_cutscene_intro
 
     call clear_input_frame
 
@@ -56,6 +56,60 @@ end_update_menu:
     lw ra, 0(sp)
     addi sp, sp, 4
 
+    ret
+
+# ------------------------------------------------------------
+# update_cutscene. SPACE ou ENTER avanca para a fase associada.
+# Outras teclas, inclusive C/c, nao alteram o estado.
+# ------------------------------------------------------------
+
+update_cutscene:
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
+    la t0, key_pressed
+    lw t1, 0(t0)
+    beqz t1, end_update_cutscene
+
+    la t0, last_key
+    lw t1, 0(t0)
+    li t2, 32
+    beq t1, t2, advance_cutscene
+    li t2, 10
+    beq t1, t2, advance_cutscene
+    li t2, 13
+    bne t1, t2, end_update_cutscene
+
+advance_cutscene:
+    call clear_input_frame
+
+    la t0, game_state
+    lw t1, 0(t0)
+    li t2, STATE_CUTSCENE_INTRO
+    beq t1, t2, advance_cutscene_to_level1
+    li t2, STATE_CUTSCENE_LEVEL2
+    beq t1, t2, advance_cutscene_to_level2
+    li t2, STATE_CUTSCENE_LEVEL3
+    beq t1, t2, advance_cutscene_to_level3
+    j end_update_cutscene
+
+advance_cutscene_to_level1:
+    call set_state_level1
+    j finish_advance_cutscene
+
+advance_cutscene_to_level2:
+    call set_state_level2
+    j finish_advance_cutscene
+
+advance_cutscene_to_level3:
+    call set_state_level3
+
+finish_advance_cutscene:
+    call clear_input_frame
+
+end_update_cutscene:
+    lw ra, 0(sp)
+    addi sp, sp, 4
     ret
 
 # ------------------------------------------------------------

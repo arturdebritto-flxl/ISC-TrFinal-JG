@@ -17,6 +17,15 @@ loop_frame:
     li t2, STATE_MENU
     beq t1, t2, loop_menu
 
+    li t2, STATE_CUTSCENE_INTRO
+    beq t1, t2, loop_cutscene
+
+    li t2, STATE_CUTSCENE_LEVEL2
+    beq t1, t2, loop_cutscene
+
+    li t2, STATE_CUTSCENE_LEVEL3
+    beq t1, t2, loop_cutscene
+
     li t2, STATE_LEVEL1
     beq t1, t2, loop_playing_level
 
@@ -42,6 +51,18 @@ loop_menu:
     call draw_menu_screen
     call end_frame
 
+    call clear_input_frame
+    call frame_delay
+    j loop_frame
+
+loop_cutscene:
+    call read_input
+
+    call begin_frame
+    call draw_cutscene_screen
+    call end_frame
+
+    call update_cutscene
     call clear_input_frame
     call frame_delay
     j loop_frame
