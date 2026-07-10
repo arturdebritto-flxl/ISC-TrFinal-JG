@@ -1,26 +1,61 @@
-# Backups e compactados
-*.zip
-*.rar
-*.7z
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyright/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
 
-# PNG source packs are inputs of the deterministic sprite pipeline.
-!assets/source/*.zip
+# Test outputs
+test-results/
+pytest-results/
+reports/
 
-# Sistema
+# Graphify
+graphify-out/
+.graphify/
+.graphify-cache/
+.graphifyignore
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.orig
+*.rej
+~$*
+
+# Operating system
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# VS Code local
-.vscode/
-
-# Arquivos temporários
-*.tmp
-*.bak
-*.log
-
-# RARS / Java
+# Java / RARS generated files
 *.class
+hs_err_pid*
+replay_pid*
 
-# Graphify generated files
-graphify-out/cache/
-graphify-out/.graphify_analysis.json
+# Local environment
+.env
+.env.*
+!.env.example
