@@ -113,7 +113,7 @@ end_update_cutscene:
     ret
 
 # ------------------------------------------------------------
-# update_game_over. Se R ou T for pressionado, volta ao menu.
+# update_game_over. Se T for pressionado, volta ao menu.
 # ------------------------------------------------------------
 
 update_game_over:
@@ -133,12 +133,6 @@ update_game_over:
     li t2, 'T'
     beq t1, t2, return_to_menu_game_over
 
-    li t2, 'r'
-    beq t1, t2, return_to_menu_game_over
-
-    li t2, 'R'
-    beq t1, t2, return_to_menu_game_over
-
     j end_update_game_over
 
 return_to_menu_game_over:
@@ -154,7 +148,7 @@ end_update_game_over:
     ret
 
 # ------------------------------------------------------------
-# update_victory. Se R ou T for pressionado, volta ao menu.
+# update_victory. Se T for pressionado, volta ao menu.
 # ------------------------------------------------------------
 
 update_victory:
@@ -172,12 +166,6 @@ update_victory:
     beq t1, t2, return_to_menu_victory
 
     li t2, 'T'
-    beq t1, t2, return_to_menu_victory
-
-    li t2, 'r'
-    beq t1, t2, return_to_menu_victory
-
-    li t2, 'R'
     beq t1, t2, return_to_menu_victory
 
     j end_update_victory

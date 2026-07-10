@@ -20,9 +20,11 @@ class FinalGameAdjustmentTests(unittest.TestCase):
         cls.level_manager = (ROOT / "src/level_manager.s").read_text(
             encoding="utf-8"
         )
+        cls.screens = (ROOT / "src/screens.s").read_text(encoding="utf-8")
         cls.game_loop = (ROOT / "src/game_loop.s").read_text(encoding="utf-8")
         cls.render = (ROOT / "src/render.s").read_text(encoding="utf-8")
         cls.hud = (ROOT / "src/hud.s").read_text(encoding="utf-8")
+        cls.readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
     def test_uzi_is_owned_separately_and_selected_only_with_key_3(self) -> None:
         self.assertRegex(self.inventory_data, r"(?m)^boss_weapon_owned:\s+\.word 0$")
@@ -50,7 +52,7 @@ class FinalGameAdjustmentTests(unittest.TestCase):
         self.assertNotIn("weapon_type", collect)
         self.assertNotIn("WEAPON_BOSS", collect)
 
-    def test_cheat_accepts_c_and_uses_safe_level_transitions(self) -> None:
+    def test_cheat_accepts_c_and_uses_cutscene_transitions(self) -> None:
         cheat = routine(
             self.level_manager,
             "handle_next_level_cheat",
@@ -62,9 +64,11 @@ class FinalGameAdjustmentTests(unittest.TestCase):
         self.assertIn("STATE_LEVEL2", cheat)
         self.assertIn("STATE_BOSS", cheat)
         self.assertIn("LEVEL_TOWN", cheat)
-        self.assertIn("call set_state_level2", cheat)
+        self.assertIn("call set_state_cutscene_level2", cheat)
+        self.assertNotIn("call set_state_level2", cheat)
         self.assertIn("LEVEL_SEWER", cheat)
-        self.assertIn("call set_state_level3", cheat)
+        self.assertIn("call set_state_cutscene_level3", cheat)
+        self.assertNotIn("call set_state_level3", cheat)
         self.assertIn("LEVEL_LABORATORY", cheat)
         self.assertIn("call set_state_victory", cheat)
 
@@ -84,8 +88,29 @@ class FinalGameAdjustmentTests(unittest.TestCase):
         self.assertRegex(
             playing,
             r"call read_input\s+call handle_next_level_cheat\s+"
-            r"bnez a0, finish_playing_frame",
+            r"bnez a0, render_cheat_transition_frame",
         )
+        self.assertIn("render_cheat_transition_frame:", playing)
+        self.assertIn("call draw_cutscene_screen", playing)
+        self.assertIn("call draw_victory_screen", playing)
+
+    def test_restart_keys_are_t_only_outside_gameplay(self) -> None:
+        game_over = routine(self.screens, "update_game_over", "update_victory")
+        victory = routine(self.screens, "update_victory", "reset_game_run")
+
+        for screen in (game_over, victory):
+            self.assertIn("li t2, 't'", screen)
+            self.assertIn("li t2, 'T'", screen)
+            self.assertNotIn("li t2, 'r'", screen)
+            self.assertNotIn("li t2, 'R'", screen)
+
+        reload_input = routine(
+            self.inventory, "handle_reload_input", "handle_inventory_input"
+        )
+        self.assertIn("li t2, 'r'", reload_input)
+        self.assertIn("li t2, 'R'", reload_input)
+        self.assertNotIn("li t2, 't'", reload_input)
+        self.assertNotIn("li t2, 'T'", reload_input)
 
     def test_final_title_uses_two_line_ascii_fallback(self) -> None:
         self.assertIn('label_title_line1: .asciz "Roedores"', self.render)
@@ -105,6 +130,36 @@ class FinalGameAdjustmentTests(unittest.TestCase):
         self.assertRegex(
             self.inventory, r"WEAPON_BOSS[\s\S]*?sprite_weapon_boss_icon"
         )
+
+    def test_menu_and_game_over_use_adapted_screen_art(self) -> None:
+        self.assertIn('../assets/generated/screen_art.s"', self.render)
+        self.assertIn("menu_base_runs", self.render)
+        self.assertIn("game_over_art_runs", self.render)
+        self.assertIn("draw_screen_runs", self.render)
+
+        menu = routine(self.render, "draw_menu_screen", "draw_cutscene_screen")
+        self.assertIn("la a0, menu_base_runs", menu)
+        self.assertIn("call draw_screen_runs", menu)
+        self.assertIn("label_title_line1", menu)
+        self.assertIn("label_title_line2", menu)
+
+        game_over = routine(
+            self.render, "draw_game_over_screen", "draw_victory_screen"
+        )
+        self.assertIn("la a0, game_over_art_runs", game_over)
+        self.assertIn("call draw_screen_runs", game_over)
+        self.assertRegex(game_over, r"la t0, score[\s\S]*?call draw_small_number")
+
+    def test_readme_is_player_and_code_documentation(self) -> None:
+        lower = self.readme.lower()
+        self.assertIn("## como rodar", lower)
+        self.assertIn("## controles", lower)
+        self.assertIn("## arquitetura do codigo", lower)
+        self.assertNotIn("checklist", lower)
+        self.assertNotIn("sprite", lower)
+        self.assertNotIn("para ia", lower)
+        self.assertNotIn("agente", lower)
+        self.assertNotIn("instrucoes para", lower)
 
 
 if __name__ == "__main__":

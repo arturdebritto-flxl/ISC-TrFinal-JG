@@ -91,7 +91,7 @@ init_level3:
 
 # ------------------------------------------------------------
 # handle_next_level_cheat
-# Cheat explicito de gameplay: C avanca para a proxima fase.
+# Cheat explicito de gameplay: C avanca para a proxima transicao.
 # Retorna a0 = 1 quando consumiu a tecla e mudou de fase.
 # ------------------------------------------------------------
 
@@ -144,13 +144,13 @@ try_next_level_cheat:
 
 cheat_to_level2:
     call reset_transient_level_state
-    call set_state_level2
+    call set_state_cutscene_level2
     li a0, 1
     j end_handle_next_level_cheat
 
 cheat_to_level3:
     call reset_transient_level_state
-    call set_state_level3
+    call set_state_cutscene_level3
     li a0, 1
     j end_handle_next_level_cheat
 

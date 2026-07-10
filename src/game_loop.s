@@ -70,7 +70,7 @@ loop_cutscene:
 loop_playing_level:
     call read_input
     call handle_next_level_cheat
-    bnez a0, finish_playing_frame
+    bnez a0, render_cheat_transition_frame
 
     call update_player
     call update_bullets
@@ -111,6 +111,34 @@ finish_playing_frame:
     call frame_delay
 
     j loop_frame
+
+render_cheat_transition_frame:
+    call begin_frame
+
+    la t0, game_state
+    lw t1, 0(t0)
+
+    li t2, STATE_CUTSCENE_LEVEL2
+    beq t1, t2, draw_cheat_cutscene_frame
+
+    li t2, STATE_CUTSCENE_LEVEL3
+    beq t1, t2, draw_cheat_cutscene_frame
+
+    li t2, STATE_VICTORY
+    beq t1, t2, draw_cheat_victory_frame
+
+    j end_cheat_transition_frame
+
+draw_cheat_cutscene_frame:
+    call draw_cutscene_screen
+    j end_cheat_transition_frame
+
+draw_cheat_victory_frame:
+    call draw_victory_screen
+
+end_cheat_transition_frame:
+    call end_frame
+    j finish_playing_frame
 
 loop_game_over:
     call read_input
