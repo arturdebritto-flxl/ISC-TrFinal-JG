@@ -436,6 +436,9 @@ play_powerup_collect_sfx:
     li a1, 70
     li a2, 10
     li a3, 80
+    la t0, sfx_enabled
+    lw t0, 0(t0)
+    beqz t0, next_powerup_collision
     li a7, 31
     ecall
 

@@ -11,14 +11,14 @@ enemy_active:           .space 60
 enemy_hp:               .space 60
 enemy_attack_timer:     .space 60
 enemy_direction:        .space 60
+enemy_avoid_direction:  .space 60
+enemy_avoid_timer:      .space 60
 enemy_spawn_rng_state:  .word 0x6D2B79F5
 
-# Pontos 16x16 previamente validados contra limites e obstaculos.
+# Buracos pretos do Town, ja centralizados para inimigos 16x16.
 town_enemy_spawn_points:
-    .word 8,24, 48,24, 88,24, 128,24, 168,24
-    .word 208,24, 248,24, 288,24, 8,84, 48,84
-    .word 144,84, 184,84, 224,84, 264,84, 8,132
-    .word 48,132, 88,132, 128,132, 264,132, 288,132
+    .word 236,25, 97,106, 37,192, 240,167
+town_enemy_spawn_points_end:
 
 sewer_enemy_spawn_points:
     .word 8,24, 40,24, 128,24, 160,24, 192,24

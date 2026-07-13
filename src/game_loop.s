@@ -5,6 +5,9 @@
 .text
 
 game_loop:
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
 loop_frame:
     la t0, frame_counter
     lw t1, 0(t0)
@@ -53,15 +56,9 @@ loop_frame:
     j loop_frame
 
 loop_menu:
-    call read_input
-    call update_menu
-
-    call begin_frame
-    call draw_menu_screen
-    call end_frame
-
-    call clear_input_frame
-    call frame_delay
+    call menu_game_screen
+    beqz a0, leave_game_loop
+    call start_new_game_from_menu
     j loop_frame
 
 loop_cutscene:
@@ -89,13 +86,8 @@ loop_post_boss_detonator:
     j loop_frame
 
 loop_post_boss_explosion:
-    call begin_frame
-    call draw_cutscene_screen
-    call end_frame
-
     call update_post_boss_explosion
     call clear_input_frame
-    call frame_delay
     j loop_frame
 
 loop_playing_level:
@@ -121,6 +113,7 @@ loop_playing_level:
     call check_player_powerup_collisions
 
     call advance_wave
+    call update_town_exit
     call update_animation_frame
 
     call begin_frame
@@ -171,6 +164,12 @@ draw_cheat_cutscene_frame:
     j end_cheat_transition_frame
 
 draw_cheat_victory_frame:
+    la t0, score
+    lw t1, 0(t0)
+    la t0, victory_score
+    sw t1, 0(t0)
+    la t0, victory_selected
+    sw zero, 0(t0)
     call draw_victory_screen
 
 end_cheat_transition_frame:
@@ -178,28 +177,26 @@ end_cheat_transition_frame:
     j finish_playing_frame
 
 loop_game_over:
-    call read_input
-    call update_game_over
-
-    call begin_frame
-    call draw_game_over_screen
-    call end_frame
-
-    call clear_input_frame
-    call frame_delay
+    la t0, score
+    lw a0, 0(t0)
+    call game_over_screen
+    beqz a0, leave_game_loop
+    call start_new_game_from_menu
     j loop_frame
 
 loop_victory:
-    call read_input
-    call update_victory
-
-    call begin_frame
-    call draw_victory_screen
-    call end_frame
-
-    call clear_input_frame
-    call frame_delay
+    la t0, score
+    lw a0, 0(t0)
+    call victory_screen
+    beqz a0, leave_game_loop
+    call reset_game_run
+    call set_state_menu
     j loop_frame
+
+leave_game_loop:
+    lw ra, 0(sp)
+    addi sp, sp, 4
+    ret
 
 frame_delay:
     li a0, DEBUG_FRAME_DELAY_MS

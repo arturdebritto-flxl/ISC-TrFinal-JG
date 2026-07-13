@@ -35,6 +35,15 @@ init_enemies_loop:
     li t5, DIR_DOWN
     sw t5, 0(t4)
 
+    la t0, enemy_avoid_direction
+    add t4, t0, t3
+    li t5, -1
+    sw t5, 0(t4)
+
+    la t0, enemy_avoid_timer
+    add t4, t0, t3
+    sw zero, 0(t4)
+
     addi t1, t1, 1
     j init_enemies_loop
 
@@ -70,6 +79,11 @@ spawn_wave_if_needed:
     j end_spawn_wave_if_needed
 
 spawn_wave_state_ok:
+    la t0, current_level
+    lw t1, 0(t0)
+    li t2, LEVEL_TOWN
+    beq t1, t2, spawn_town_enemy_if_needed
+
     la t0, wave_spawned
     lw t1, 0(t0)
     bnez t1, end_spawn_wave_if_needed
@@ -83,6 +97,41 @@ spawn_wave_state_ok:
 
     la t0, wave_spawned
     li t1, 1
+    sw t1, 0(t0)
+    j end_spawn_wave_if_needed
+
+spawn_town_enemy_if_needed:
+    la t0, town_exit_unlocked
+    lw t1, 0(t0)
+    bnez t1, end_spawn_wave_if_needed
+
+    call get_town_wave_enemy_count
+    mv t2, a0
+    la t0, wave_spawned
+    lw t1, 0(t0)
+    bge t1, t2, end_spawn_wave_if_needed
+
+    la t0, town_spawn_timer
+    lw t1, 0(t0)
+    blez t1, check_town_spawn_slot
+    addi t1, t1, -1
+    sw t1, 0(t0)
+    bgtz t1, end_spawn_wave_if_needed
+
+check_town_spawn_slot:
+    call count_active_enemies
+    li t0, TOWN_MAX_ACTIVE_ENEMIES
+    bge a0, t0, end_spawn_wave_if_needed
+
+try_spawn_one_town_enemy:
+    call spawn_one_town_enemy
+    beqz a0, end_spawn_wave_if_needed
+    la t0, wave_spawned
+    lw t1, 0(t0)
+    addi t1, t1, 1
+    sw t1, 0(t0)
+    la t0, town_spawn_timer
+    li t1, TOWN_SPAWN_INTERVAL
     sw t1, 0(t0)
 
 end_spawn_wave_if_needed:
@@ -263,6 +312,107 @@ finish_spawn_current_enemy_wave:
     lw ra, 0(sp)
     addi sp, sp, 16
 
+    ret
+
+# Cria exatamente um inimigo do Town no primeiro slot livre. O indice
+# wave_spawned preserva a ordem e os tipos da wave original.
+spawn_one_town_enemy:
+    addi sp, sp, -16
+    sw ra, 0(sp)
+    sw s0, 4(sp)
+    sw s1, 8(sp)
+    sw s2, 12(sp)
+
+    li s0, 0
+find_town_enemy_free_slot:
+    li t0, MAX_ENEMIES
+    beq s0, t0, spawn_one_town_enemy_failed
+    slli s1, s0, 2
+    la t0, enemy_active
+    add t0, t0, s1
+    lw t1, 0(t0)
+    beqz t1, configure_one_town_enemy
+    addi s0, s0, 1
+    j find_town_enemy_free_slot
+
+configure_one_town_enemy:
+    la t0, wave_spawned
+    lw s2, 0(t0)
+    andi t1, s2, 3
+    beqz t1, configure_one_town_echo
+    li t1, RAT_COMMON
+    li t2, RAT_COMMON_HP
+    j store_one_town_enemy_type
+
+configure_one_town_echo:
+    li t1, RAT_ECHO
+    li t2, RAT_ECHO_HP
+
+store_one_town_enemy_type:
+    la t0, enemy_type
+    add t0, t0, s1
+    sw t1, 0(t0)
+    la t0, enemy_hp
+    add t0, t0, s1
+    sw t2, 0(t0)
+    la t0, enemy_attack_timer
+    add t0, t0, s1
+    sw zero, 0(t0)
+    la t0, enemy_avoid_direction
+    add t0, t0, s1
+    li t1, -1
+    sw t1, 0(t0)
+    la t0, enemy_avoid_timer
+    add t0, t0, s1
+    sw zero, 0(t0)
+    la t0, enemy_direction
+    add t0, t0, s1
+    li t1, DIR_DOWN
+    sw t1, 0(t0)
+
+    call select_enemy_spawn_position
+    beqz a0, spawn_one_town_enemy_failed
+    la t0, enemy_x
+    add t0, t0, s1
+    sw a1, 0(t0)
+    la t0, enemy_y
+    add t0, t0, s1
+    sw a2, 0(t0)
+    la t0, enemy_active
+    add t0, t0, s1
+    li t1, 1
+    sw t1, 0(t0)
+    li a0, 1
+    j finish_spawn_one_town_enemy
+
+spawn_one_town_enemy_failed:
+    mv a0, zero
+
+finish_spawn_one_town_enemy:
+    lw s2, 12(sp)
+    lw s1, 8(sp)
+    lw s0, 4(sp)
+    lw ra, 0(sp)
+    addi sp, sp, 16
+    ret
+
+count_active_enemies:
+    li t0, 0
+    li t1, 0
+count_active_enemies_loop:
+    li t2, MAX_ENEMIES
+    beq t1, t2, finish_count_active_enemies
+    slli t3, t1, 2
+    la t4, enemy_active
+    add t4, t4, t3
+    lw t5, 0(t4)
+    beqz t5, next_count_active_enemy
+    addi t0, t0, 1
+next_count_active_enemy:
+    addi t1, t1, 1
+    j count_active_enemies_loop
+finish_count_active_enemies:
+    mv a0, t0
     ret
 
 # ------------------------------------------------------------
@@ -507,15 +657,17 @@ select_enemy_spawn_position:
     li t2, LEVEL_LABORATORY
     bne t1, t2, select_enemy_spawn_failed
     la s0, laboratory_enemy_spawn_points
+    li s1, ENEMY_SPAWN_POINT_COUNT
     j enemy_spawn_table_ready
 select_town_spawn_table:
     la s0, town_enemy_spawn_points
+    li s1, TOWN_SPAWN_POINT_COUNT
     j enemy_spawn_table_ready
 select_sewer_spawn_table:
     la s0, sewer_enemy_spawn_points
+    li s1, ENEMY_SPAWN_POINT_COUNT
 
 enemy_spawn_table_ready:
-    li s1, ENEMY_SPAWN_POINT_COUNT
     li s2, 0
     li s3, 0
     li s4, 0
@@ -807,51 +959,52 @@ spitter_fire_at_player:
 
     la t0, enemy_x
     add t4, t0, t3
-    lw a0, 0(t4)
-    addi a0, a0, 4
+    lw t5, 0(t4)
+    addi t5, t5, 8
 
     la t0, enemy_y
     add t4, t0, t3
-    lw a1, 0(t4)
-    addi a1, a1, 4
+    lw t6, 0(t4)
+    addi t6, t6, 8
 
     la t0, player_x
-    lw t5, 0(t0)
-    sub t5, t5, a0
-    mv t6, t5
-    bgez t6, spitter_fire_dx_abs_ok
-    sub t6, zero, t6
+    lw a2, 0(t0)
+    addi a2, a2, 8
+    sub a2, a2, t5
 
-spitter_fire_dx_abs_ok:
     la t0, player_y
     lw a3, 0(t0)
-    sub a3, a3, a1
+    addi a3, a3, 8
+    sub a3, a3, t6
+
+    mv t0, a2
+    bgez t0, spitter_fire_dx_abs_ok
+    sub t0, zero, t0
+
+spitter_fire_dx_abs_ok:
     mv a4, a3
     bgez a4, spitter_fire_dy_abs_ok
     sub a4, zero, a4
 
 spitter_fire_dy_abs_ok:
-    bgt t6, a4, spitter_fire_horizontal
+    bge t0, a4, spitter_fire_max_ready
+    mv t0, a4
 
-spitter_fire_vertical:
-    li a2, 0
-    li t6, ENEMY_BULLET_SPEED
-    bgez a3, spitter_fire_down
-    sub t6, zero, t6
-
-spitter_fire_down:
-    mv a3, t6
-    li a4, ENEMY_PROJECTILE_SPITTER
-    call spawn_enemy_bullet_typed
-    j end_spitter_fire_at_player
-
-spitter_fire_horizontal:
+spitter_fire_max_ready:
+    bnez t0, spitter_fire_normalize
+    li a2, 1
     li a3, 0
-    li a2, ENEMY_BULLET_SPEED
-    bgez t5, spitter_fire_right
-    sub a2, zero, a2
+    li t0, 1
 
-spitter_fire_right:
+spitter_fire_normalize:
+    li t2, SPITTER_PROJECTILE_SPEED
+    mul a2, a2, t2
+    div a2, a2, t0
+    mul a3, a3, t2
+    div a3, a3, t0
+
+    addi a0, t5, -2
+    addi a1, t6, -2
     li a4, ENEMY_PROJECTILE_SPITTER
     call spawn_enemy_bullet_typed
 
@@ -951,6 +1104,13 @@ end_try_move_enemy_y:
     ret
 
 move_rat_towards_player:
+    la t0, current_level
+    lw t5, 0(t0)
+    li t6, LEVEL_TOWN
+    bne t5, t6, move_rat_legacy_towards_player
+    j move_rat_with_local_avoidance
+
+move_rat_legacy_towards_player:
     # mover x em direcao ao player_x
     la t0, enemy_x
     add t4, t0, t3
@@ -996,6 +1156,275 @@ rat_move_up:
     sub t5, t5, a5
     li a4, DIR_UP
     jal ra, try_move_enemy_y
+
+    j next_update_enemy
+
+# Desvio local do Town. Tenta o eixo dominante; quando bloqueado,
+# persiste no lado escolhido por 12 frames e retoma a perseguicao
+# assim que o movimento direto volta a ficar livre.
+move_rat_with_local_avoidance:
+    addi sp, sp, -28
+    sw s0, 0(sp)
+    sw s1, 4(sp)
+    sw s2, 8(sp)
+    sw s3, 12(sp)
+    sw s4, 16(sp)
+    sw s5, 20(sp)
+    sw s6, 24(sp)
+
+    li s2, 0
+    la t0, enemy_avoid_timer
+    add t0, t0, t3
+    lw t5, 0(t0)
+    blez t5, town_enemy_calculate_direct_directions
+    la t0, enemy_avoid_direction
+    add t0, t0, t3
+    lw a6, 0(t0)
+    bltz a6, town_enemy_calculate_direct_directions
+
+try_persisted_enemy_avoidance:
+    jal ra, try_move_enemy_direction
+    bnez a0, town_enemy_clear_stale_then_recompute
+    la t0, enemy_avoid_timer
+    add t0, t0, t3
+    lw t5, 0(t0)
+    addi t5, t5, -1
+    bgez t5, town_enemy_store_persisted_timer
+    mv t5, zero
+town_enemy_store_persisted_timer:
+    sw t5, 0(t0)
+    li s2, 1
+
+town_enemy_calculate_direct_directions:
+    li s3, -1
+    li s4, -1
+    la t0, enemy_x
+    add t0, t0, t3
+    lw t5, 0(t0)
+    la t0, player_x
+    lw t6, 0(t0)
+    sub s5, t6, t5
+    beqz s5, town_enemy_x_direction_ready
+    bltz s5, town_enemy_direct_left
+    li s3, DIR_RIGHT
+    j town_enemy_abs_dx
+town_enemy_direct_left:
+    li s3, DIR_LEFT
+town_enemy_abs_dx:
+    bgez s5, town_enemy_x_direction_ready
+    sub s5, zero, s5
+
+town_enemy_x_direction_ready:
+    la t0, enemy_y
+    add t0, t0, t3
+    lw t5, 0(t0)
+    la t0, player_y
+    lw t6, 0(t0)
+    sub s6, t6, t5
+    beqz s6, town_enemy_y_direction_ready
+    bltz s6, town_enemy_direct_up
+    li s4, DIR_DOWN
+    j town_enemy_abs_dy
+town_enemy_direct_up:
+    li s4, DIR_UP
+town_enemy_abs_dy:
+    bgez s6, town_enemy_y_direction_ready
+    sub s6, zero, s6
+
+town_enemy_y_direction_ready:
+    bge s5, s6, town_enemy_x_dominant
+    mv s0, s4
+    mv s1, s3
+    j town_enemy_directions_selected
+town_enemy_x_dominant:
+    mv s0, s3
+    mv s1, s4
+
+town_enemy_directions_selected:
+    bgez s0, town_enemy_primary_ready
+    mv s0, s1
+    li s1, -1
+town_enemy_primary_ready:
+    bltz s0, finish_move_rat_with_local_avoidance
+    beqz s2, town_enemy_try_direct_primary
+
+    # A direcao persistida ja moveu este frame. Se o caminho dominante
+    # direto reabriu, encerra o compromisso; caso contrario, mantem-o.
+    mv a6, s0
+    jal ra, is_enemy_direction_clear
+    bnez a0, town_enemy_direct_path_clear
+    j finish_move_rat_with_local_avoidance
+
+town_enemy_try_direct_primary:
+    mv a6, s0
+    jal ra, try_move_enemy_direction
+    beqz a0, town_enemy_direct_path_clear
+
+    # O segundo eixo direto so e testado depois do dominante bloquear.
+    bltz s1, town_enemy_recompute_perpendicular_avoidance
+    mv a6, s1
+    jal ra, try_move_enemy_direction
+    beqz a0, town_enemy_direct_path_clear
+    j town_enemy_recompute_perpendicular_avoidance
+
+town_enemy_clear_stale_then_recompute:
+    la t0, enemy_avoid_timer
+    add t0, t0, t3
+    sw zero, 0(t0)
+    la t0, enemy_avoid_direction
+    add t0, t0, t3
+    li t5, -1
+    sw t5, 0(t0)
+    li s2, 0
+    j town_enemy_calculate_direct_directions
+
+town_enemy_recompute_perpendicular_avoidance:
+    # Se nao existe segundo eixo direto, escolhe uma perpendicular
+    # deterministica; caso exista, ela ja bloqueou e testa-se o oposto.
+    bgez s1, town_enemy_try_opposite
+    li t0, DIR_LEFT
+    beq s0, t0, town_enemy_choose_vertical_side
+    li t0, DIR_RIGHT
+    beq s0, t0, town_enemy_choose_vertical_side
+    li s1, DIR_RIGHT
+    j town_enemy_try_new_perpendicular
+town_enemy_choose_vertical_side:
+    li s1, DIR_DOWN
+town_enemy_try_new_perpendicular:
+    mv a6, s1
+    jal ra, try_move_enemy_direction
+    beqz a0, town_enemy_store_avoidance
+
+town_enemy_try_opposite:
+    xori s2, s1, 2
+    mv a6, s2
+    jal ra, try_move_enemy_direction
+    bnez a0, finish_move_rat_with_local_avoidance
+    mv s1, s2
+
+town_enemy_store_avoidance:
+    la t0, enemy_avoid_direction
+    add t0, t0, t3
+    sw s1, 0(t0)
+    la t0, enemy_avoid_timer
+    add t0, t0, t3
+    li t5, ENEMY_AVOID_COMMIT_FRAMES
+    sw t5, 0(t0)
+    j finish_move_rat_with_local_avoidance
+
+town_enemy_direct_path_clear:
+    la t0, enemy_avoid_timer
+    add t0, t0, t3
+    sw zero, 0(t0)
+    la t0, enemy_avoid_direction
+    add t0, t0, t3
+    li t5, -1
+    sw t5, 0(t0)
+
+finish_move_rat_with_local_avoidance:
+    lw s6, 24(sp)
+    lw s5, 20(sp)
+    lw s4, 16(sp)
+    lw s3, 12(sp)
+    lw s2, 8(sp)
+    lw s1, 4(sp)
+    lw s0, 0(sp)
+    addi sp, sp, 28
+    j next_update_enemy
+
+# Consulta uma direcao sem mover. Retorna a0=1 quando a posicao candidata
+# esta livre e preserva o offset/velocidade usados pelo loop de inimigos.
+is_enemy_direction_clear:
+    addi sp, sp, -24
+    sw ra, 0(sp)
+    sw t1, 4(sp)
+    sw t3, 8(sp)
+    sw a5, 12(sp)
+    sw a6, 16(sp)
+    la t0, enemy_x
+    add t0, t0, t3
+    lw a0, 0(t0)
+    la t0, enemy_y
+    add t0, t0, t3
+    lw a1, 0(t0)
+    li t0, DIR_RIGHT
+    beq a6, t0, enemy_clear_test_right
+    li t0, DIR_LEFT
+    beq a6, t0, enemy_clear_test_left
+    li t0, DIR_DOWN
+    beq a6, t0, enemy_clear_test_down
+    sub a1, a1, a5
+    j run_enemy_direction_clear_test
+enemy_clear_test_right:
+    add a0, a0, a5
+    j run_enemy_direction_clear_test
+enemy_clear_test_left:
+    sub a0, a0, a5
+    j run_enemy_direction_clear_test
+enemy_clear_test_down:
+    add a1, a1, a5
+run_enemy_direction_clear_test:
+    call is_enemy_position_blocked
+    seqz a0, a0
+    lw a6, 16(sp)
+    lw a5, 12(sp)
+    lw t3, 8(sp)
+    lw t1, 4(sp)
+    lw ra, 0(sp)
+    addi sp, sp, 24
+    ret
+
+try_move_enemy_direction:
+    addi sp, sp, -8
+    sw ra, 0(sp)
+    sw a6, 4(sp)
+    li t0, DIR_RIGHT
+    beq a6, t0, try_move_enemy_direction_right
+    li t0, DIR_LEFT
+    beq a6, t0, try_move_enemy_direction_left
+    li t0, DIR_DOWN
+    beq a6, t0, try_move_enemy_direction_down
+
+try_move_enemy_direction_up:
+    la t0, enemy_y
+    add t4, t0, t3
+    lw t5, 0(t4)
+    sub t5, t5, a5
+    li a4, DIR_UP
+    jal ra, try_move_enemy_y
+    j finish_try_move_enemy_direction
+
+try_move_enemy_direction_right:
+    la t0, enemy_x
+    add t4, t0, t3
+    lw t5, 0(t4)
+    add t5, t5, a5
+    li a4, DIR_RIGHT
+    jal ra, try_move_enemy_x
+    j finish_try_move_enemy_direction
+
+try_move_enemy_direction_left:
+    la t0, enemy_x
+    add t4, t0, t3
+    lw t5, 0(t4)
+    sub t5, t5, a5
+    li a4, DIR_LEFT
+    jal ra, try_move_enemy_x
+    j finish_try_move_enemy_direction
+
+try_move_enemy_direction_down:
+    la t0, enemy_y
+    add t4, t0, t3
+    lw t5, 0(t4)
+    add t5, t5, a5
+    li a4, DIR_DOWN
+    jal ra, try_move_enemy_y
+
+finish_try_move_enemy_direction:
+    lw a6, 4(sp)
+    lw ra, 0(sp)
+    addi sp, sp, 8
+    ret
 
 next_update_enemy:
     addi t1, t1, 1

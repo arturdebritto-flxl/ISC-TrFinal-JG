@@ -43,6 +43,21 @@ init_game:
     la t0, post_boss_explosion_timer
     sw zero, 0(t0)
 
+    la t0, town_spawn_timer
+    sw zero, 0(t0)
+
+    la t0, town_exit_unlocked
+    sw zero, 0(t0)
+
+    la t0, town_exit_blink_timer
+    sw zero, 0(t0)
+
+    la t0, town_exit_blink_frame
+    sw zero, 0(t0)
+
+    la t0, town_exit_transitioned
+    sw zero, 0(t0)
+
     la t0, debug_mode
     li t1, 1
     sw t1, 0(t0)
@@ -64,6 +79,9 @@ clear_input_buffers:
     sw zero, 0(t0)
 
     la t0, key_pressed
+    sw zero, 0(t0)
+
+    la t0, cutscene_text_visible
     sw zero, 0(t0)
 
     la t0, shoot_request_pending
@@ -216,10 +234,18 @@ set_state_cutscene_intro:
     j clear_input_buffers
 
 set_state_cutscene_level2:
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
     la t0, game_state
     li t1, STATE_CUTSCENE_LEVEL2
     sw t1, 0(t0)
-    j clear_input_buffers
+
+    call clear_input_buffers
+
+    lw ra, 0(sp)
+    addi sp, sp, 4
+    ret
 
 set_state_cutscene_level3:
     la t0, game_state
@@ -267,6 +293,9 @@ set_state_cutscene_explosion:
 # ------------------------------------------------------------
 
 set_state_victory:
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
     la t0, game_state
     li t1, STATE_VICTORY
     sw t1, 0(t0)
@@ -275,10 +304,13 @@ set_state_victory:
     li a1, 180
     li a2, 9
     li a3, 90
-    li a7, 31
-    ecall
+    call play_music_note
 
-    j clear_input_buffers
+    call clear_input_buffers
+
+    lw ra, 0(sp)
+    addi sp, sp, 4
+    ret
 
 # ------------------------------------------------------------
 # set_state_game_over
@@ -286,6 +318,9 @@ set_state_victory:
 # ------------------------------------------------------------
 
 set_state_game_over:
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
     la t0, game_state
     li t1, STATE_GAME_OVER
     sw t1, 0(t0)
@@ -294,10 +329,13 @@ set_state_game_over:
     li a1, 180
     li a2, 9
     li a3, 80
-    li a7, 31
-    ecall
+    call play_music_note
 
-    j clear_input_buffers
+    call clear_input_buffers
+
+    lw ra, 0(sp)
+    addi sp, sp, 4
+    ret
 
 # ------------------------------------------------------------
 # set_state_menu
@@ -305,6 +343,9 @@ set_state_game_over:
 # ------------------------------------------------------------
 
 set_state_menu:
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
     la t0, game_state
     li t1, STATE_MENU
     sw t1, 0(t0)
@@ -328,4 +369,8 @@ set_state_menu:
     la t0, boss_active
     sw zero, 0(t0)
 
-    j clear_input_buffers
+    call clear_input_buffers
+
+    lw ra, 0(sp)
+    addi sp, sp, 4
+    ret

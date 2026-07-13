@@ -116,6 +116,15 @@
 .eqv TOWN_WAVE2_ENEMIES         5
 .eqv TOWN_WAVE3_ENEMIES         6
 .eqv TOWN_WAVE4_ENEMIES         7
+.eqv TOWN_COLLISION_AABB_COUNT  13
+.eqv TOWN_FIRST_SPAWN_DELAY     8
+.eqv TOWN_SPAWN_INTERVAL        15
+.eqv TOWN_MAX_ACTIVE_ENEMIES    5
+.eqv TOWN_SPAWN_POINT_COUNT     4
+.eqv TOWN_EXIT_BLINK_FRAMES     6
+.eqv TOWN_EXIT_CENTER_X         64
+.eqv TOWN_EXIT_CENTER_Y         31
+.eqv TOWN_EXIT_RADIUS_SQUARED   144
 
 # ------------------------------------------------------------
 # Configuracao das waves da fase 2: Sewer
@@ -187,7 +196,7 @@
 .eqv PLAYER_START_Y             112
 .eqv PLAYER_LAB_START_X         152
 .eqv PLAYER_LAB_START_Y         132
-.eqv PLAYER_SMOOTH_SPEED        2
+.eqv PLAYER_SMOOTH_SPEED        3
 .eqv MOVE_AXIS_BUFFER_FRAMES    6
 .eqv SHOOT_REQUEST_BUFFER_FRAMES 3
 .eqv PLAYER_SPEED               3
@@ -231,6 +240,7 @@
 .eqv ENEMY_SPAWN_POINT_COUNT    20
 .eqv SPAWN_MIN_PLAYER_DISTANCE  96
 .eqv ENEMY_SPAWN_MAX_Y          198
+.eqv ENEMY_AVOID_COMMIT_FRAMES  12
 
 # ------------------------------------------------------------
 # Pontuacao
@@ -246,13 +256,13 @@
 # ------------------------------------------------------------
 
 .eqv RAT_COMMON_HP          1
-.eqv RAT_ECHO_HP            1
-.eqv RAT_MUTANT_HP          2
-.eqv RAT_SPITTER_HP         1
+.eqv RAT_ECHO_HP            2
+.eqv RAT_MUTANT_HP          3
+.eqv RAT_SPITTER_HP         2
 
 .eqv RAT_COMMON_SPEED       1
-.eqv RAT_ECHO_SPEED         1
-.eqv RAT_ECHO_ALERT_SPEED   1
+.eqv RAT_ECHO_SPEED         2
+.eqv RAT_ECHO_ALERT_SPEED   2
 .eqv RAT_ECHO_IDLE_SPEED    0
 .eqv RAT_MUTANT_SPEED       1
 .eqv RAT_SPITTER_SPEED      1
@@ -278,16 +288,17 @@
 .eqv SPITTER_APPROACH_SPEED     1
 .eqv SPITTER_RETREAT_SPEED      1
 .eqv SPITTER_STRAFE_SPEED       1
-.eqv SPITTER_PROJECTILE_RANGE   90
+.eqv SPITTER_PROJECTILE_RANGE   125
 .eqv SPITTER_PROJECTILE_LIFE    45
+.eqv SPITTER_PROJECTILE_SPEED   4
 
 .eqv ENEMY_PROJECTILE_SPITTER       1
 .eqv ENEMY_PROJECTILE_BOSS_HEAVY    2
-.eqv SPITTER_PROJECTILE_SIZE        3
+.eqv SPITTER_PROJECTILE_SIZE        5
 .eqv SPITTER_PROJECTILE_DAMAGE      1
-.eqv BOSS_PROJECTILE_SIZE           10
+.eqv BOSS_PROJECTILE_SIZE           7
 .eqv BOSS_PROJECTILE_DAMAGE         1
-.eqv BOSS_PROJECTILE_SPEED          2
+.eqv BOSS_PROJECTILE_SPEED          3
 .eqv BOSS_PROJECTILE_LIFE           70
 
 # ------------------------------------------------------------
@@ -297,17 +308,19 @@
 .eqv BOSS_SIZE                 32
 .eqv BOSS_START_X              152
 .eqv BOSS_START_Y              32
-.eqv BOSS_HP_START             20
-.eqv BOSS_SPEED                1
+.eqv BOSS_HP_START             50
+.eqv BOSS_SPEED                2
 
 .eqv BOSS_MIN_X                24
 .eqv BOSS_MAX_X                272
+.eqv BOSS_MIN_Y                20
+.eqv BOSS_MAX_Y                200
 
 .eqv BOSS_SHOOT_DELAY          50
-.eqv BOSS_MELEE_RANGE          20
+.eqv BOSS_MELEE_RANGE          10
 .eqv BOSS_MELEE_DAMAGE         1
 .eqv BOSS_MELEE_COOLDOWN       60
-.eqv BOSS_HEAVY_SHOOT_DELAY    90
+.eqv BOSS_HEAVY_SHOOT_DELAY    60
 .eqv BOSS_HEAVY_PROJECTILE_DX  0
 .eqv BOSS_HEAVY_PROJECTILE_DY  2
 .eqv SCORE_BOSS                1000

@@ -996,124 +996,124 @@
     },
     {
       "content_size": [
-        7,
+        16,
         16
       ],
       "crop": [
-        50,
         0,
-        120,
-        150
+        0,
+        16,
+        16
       ],
-      "group": "_sprites_1",
+      "group": "_final_sprites",
       "offset": [
-        4,
+        0,
         0
       ],
       "output_size": [
         16,
         16
       ],
-      "payload_sha256": "86b000407f596a4e4d39a0d197074328182cd3f5b4a7ec86d0c3122ced7e023d",
-      "resampling": "nearest",
-      "source": "sprites/image-12.png.png",
-      "source_sha256": "252e0a050b944fbfcec40ad069efe926703fb350e0c5fe39cd19ac13018d71b4",
+      "payload_sha256": "cbec2a5e24c74b3fa2cc1ba3aac750f4366237f3c90d8aa8bc580be09f517373",
+      "resampling": "none",
+      "source": "03_INIMIGOS/rat_spitter_16x16/frames/down__walk_1.png",
+      "source_sha256": "24f1d807380192870da2e5c9ff0005320c3b34f948ce1726cab9fa3b20d066b9",
       "source_size": [
-        160,
-        160
+        16,
+        16
       ],
       "symbol": "sprite_enemy_spitter_down_0",
       "transparent_value": 0
     },
     {
       "content_size": [
-        7,
+        16,
         16
       ],
       "crop": [
-        50,
         0,
-        120,
-        150
+        0,
+        16,
+        16
       ],
-      "group": "_sprites_1",
+      "group": "_final_sprites",
       "offset": [
-        4,
+        0,
         0
       ],
       "output_size": [
         16,
         16
       ],
-      "payload_sha256": "e1864048ba5a276448ed9925cfc1cd24a0af81ae5593f24bbe32cd393926a7e3",
-      "resampling": "nearest",
-      "source": "sprites/image-18.png.png",
-      "source_sha256": "f25775f9dcb392b2cac82c0bd13bccf13ce7e4997a53d7e8cba538380503e0e5",
+      "payload_sha256": "9d754be1719269f81732879be5c1a916a1ff3fb1447b65b163972ecbc3a7432d",
+      "resampling": "none",
+      "source": "03_INIMIGOS/rat_spitter_16x16/frames/down__walk_2.png",
+      "source_sha256": "d3df6d077e23af86b58b721aeff43045c4a45b6f2b70663a4cbe16a693f6fdc9",
       "source_size": [
-        160,
-        160
+        16,
+        16
       ],
       "symbol": "sprite_enemy_spitter_down_1",
       "transparent_value": 0
     },
     {
       "content_size": [
-        7,
+        16,
         16
       ],
       "crop": [
-        40,
-        10,
-        110,
-        160
+        0,
+        0,
+        16,
+        16
       ],
-      "group": "_sprites_1",
+      "group": "_final_sprites",
       "offset": [
-        4,
+        0,
         0
       ],
       "output_size": [
         16,
         16
       ],
-      "payload_sha256": "d9dddc7b7ccfe12e3e0eef1578ac7bc4537893165364e8e53f30640016dfeb70",
-      "resampling": "nearest",
-      "source": "sprites/image-13.png.png",
-      "source_sha256": "abff406d03d014aeb55fbe95db7d292ad37c87c05b6f2705074400a6206befea",
+      "payload_sha256": "65bf114381e25074aaae2b05f1731fffa51d7f274ebe0c6e62a8ddd7302f7f7b",
+      "resampling": "none",
+      "source": "03_INIMIGOS/rat_spitter_16x16/frames/up__walk_1.png",
+      "source_sha256": "c31548115998aec23fb2b7bf64a1c5444973ce5309d6af23f3df1172e0850866",
       "source_size": [
-        160,
-        160
+        16,
+        16
       ],
       "symbol": "sprite_enemy_spitter_up_0",
       "transparent_value": 0
     },
     {
       "content_size": [
-        7,
+        16,
         16
       ],
       "crop": [
-        40,
-        10,
-        110,
-        160
+        0,
+        0,
+        16,
+        16
       ],
-      "group": "_sprites_1",
+      "group": "_final_sprites",
       "offset": [
-        4,
+        0,
         0
       ],
       "output_size": [
         16,
         16
       ],
-      "payload_sha256": "dbed7c95c07f5a4c5cf388258eac0034571a67e54e4a2661e8411ec574d29453",
-      "resampling": "nearest",
-      "source": "sprites/image-19.png.png",
-      "source_sha256": "00eb5d80f301cc50134481e0f5aee5269f853a38cc57ee03b8e726cfaad8d4d3",
+      "payload_sha256": "f5bb2cd99230efabed1aa090d415b4f5bf67ee1a87c15f1eadc920664f6e0cfd",
+      "resampling": "none",
+      "source": "03_INIMIGOS/rat_spitter_16x16/frames/up__walk_2.png",
+      "source_sha256": "c8be07a9bf1e5d351dc63f466c8202a856b3e9deefec7bb6a7a122db8fac8e74",
       "source_size": [
-        160,
-        160
+        16,
+        16
       ],
       "symbol": "sprite_enemy_spitter_up_1",
       "transparent_value": 0
@@ -1121,30 +1121,30 @@
     {
       "content_size": [
         16,
-        11
+        16
       ],
       "crop": [
-        10,
-        40,
-        150,
-        140
+        0,
+        0,
+        16,
+        16
       ],
-      "group": "_sprites_1",
+      "group": "_final_sprites",
       "offset": [
         0,
-        2
+        0
       ],
       "output_size": [
         16,
         16
       ],
-      "payload_sha256": "6454c1aa323caeb51955678692f166dd3b4bd62ceb2681abe0a828536e191023",
-      "resampling": "nearest",
-      "source": "sprites/image-16.png.png",
-      "source_sha256": "d0d5fed4853bc8fd62a54b5aa4ec0782dd4bbe5e97db045096cd3c868b9091f6",
+      "payload_sha256": "5ba37ea5f59ed261be22586dad6a3d9fa9b4424f7e4a1c593220c4a4d9c49d2c",
+      "resampling": "none",
+      "source": "03_INIMIGOS/rat_spitter_16x16/frames/right__walk_1.png",
+      "source_sha256": "b177eaec28aa9687a21627f51719f200afbc41ab43a2e941856526ff0a697872",
       "source_size": [
-        160,
-        160
+        16,
+        16
       ],
       "symbol": "sprite_enemy_spitter_right_0",
       "transparent_value": 0
@@ -1152,30 +1152,30 @@
     {
       "content_size": [
         16,
-        11
+        16
       ],
       "crop": [
-        10,
-        40,
-        150,
-        140
+        0,
+        0,
+        16,
+        16
       ],
-      "group": "_sprites_1",
+      "group": "_final_sprites",
       "offset": [
         0,
-        2
+        0
       ],
       "output_size": [
         16,
         16
       ],
-      "payload_sha256": "18c2d314b4e443937c997b93e2bf936e4acef8120cea1188c547e5b779a275be",
-      "resampling": "nearest",
-      "source": "sprites/image-17.png.png",
-      "source_sha256": "c1063c0886113c355ffaf0d8c87eea29d0d69842bfda4b9f0530240718638c1a",
+      "payload_sha256": "f8b8c95feb52b4834e9d65ff2d29253e07fc7754c36030cf62f23afd110f23bd",
+      "resampling": "none",
+      "source": "03_INIMIGOS/rat_spitter_16x16/frames/right__walk_2.png",
+      "source_sha256": "b9e56aeeba47c82035db076f42cc6e2f21a838ba612affa9f9046914e9650834",
       "source_size": [
-        160,
-        160
+        16,
+        16
       ],
       "symbol": "sprite_enemy_spitter_right_1",
       "transparent_value": 0
@@ -1183,30 +1183,30 @@
     {
       "content_size": [
         16,
-        11
+        16
       ],
       "crop": [
-        10,
-        40,
-        150,
-        140
+        0,
+        0,
+        16,
+        16
       ],
-      "group": "_sprites_1",
+      "group": "_final_sprites",
       "offset": [
         0,
-        2
+        0
       ],
       "output_size": [
         16,
         16
       ],
-      "payload_sha256": "430f53e56b3ce4629629d61164fa158bef28a6b6cddaff16e656c69bd95c0a2f",
-      "resampling": "nearest",
-      "source": "sprites/image-14.png.png",
-      "source_sha256": "4e0bcb1b2bcb0594446ddb1a89da0e60747ea7edca72b28c5717c118a402e5b9",
+      "payload_sha256": "00a1a531fe98f61d7c5d19174f62c0d38a973e5db52fe2186fe28a035e82cc15",
+      "resampling": "none",
+      "source": "03_INIMIGOS/rat_spitter_16x16/frames/left__walk_1.png",
+      "source_sha256": "ab2deb21579096d931ef34b0b8d9ab4eb61ed87ccdf6e08a3e4d8d27fb50dcb9",
       "source_size": [
-        160,
-        160
+        16,
+        16
       ],
       "symbol": "sprite_enemy_spitter_left_0",
       "transparent_value": 0
@@ -1214,30 +1214,30 @@
     {
       "content_size": [
         16,
-        11
+        16
       ],
       "crop": [
-        10,
-        40,
-        150,
-        140
+        0,
+        0,
+        16,
+        16
       ],
-      "group": "_sprites_1",
+      "group": "_final_sprites",
       "offset": [
         0,
-        2
+        0
       ],
       "output_size": [
         16,
         16
       ],
-      "payload_sha256": "9e02c87b9d14c48f6c8cc7ef624604ba49248a50772dd5a76d79dd24d2d9a802",
-      "resampling": "nearest",
-      "source": "sprites/image-15.png.png",
-      "source_sha256": "19e0b4d6bfefbbdbdd44104900c9bec109dcb3e1eaa5b94192df7465d3b70a70",
+      "payload_sha256": "e3d83f3cdd8f5c8c3115a8e96bf888b6f45fddeb0c94cd2d6ce9754889bf9e10",
+      "resampling": "none",
+      "source": "03_INIMIGOS/rat_spitter_16x16/frames/left__walk_2.png",
+      "source_sha256": "4da07e21932518489ed47dc0a593d3fe804ac92e47e619649ba153400866839c",
       "source_size": [
-        160,
-        160
+        16,
+        16
       ],
       "symbol": "sprite_enemy_spitter_left_1",
       "transparent_value": 0
@@ -1926,14 +1926,14 @@
     },
     {
       "content_size": [
-        4,
-        4
+        5,
+        5
       ],
       "crop": [
         0,
         0,
-        4,
-        4
+        5,
+        5
       ],
       "group": "_final_sprites",
       "offset": [
@@ -1941,30 +1941,30 @@
         0
       ],
       "output_size": [
-        4,
-        4
+        5,
+        5
       ],
-      "payload_sha256": "3b06519231c1ea91165f4d0dacb2738e7f9d652c52435facae5d1f115bf9c25a",
+      "payload_sha256": "2a4b6d90f36added66c080d3940a86a2e79c28c94c6c63a9617cbdcd40ed536a",
       "resampling": "none",
-      "source": "06_PROJETEIS/projectile_spitter_4x4.png",
-      "source_sha256": "bf82b3f41511fcf7cb804096051fc2de8052baeda791f00dccc0ee520ca10878",
+      "source": "06_PROJETEIS/projectile_spitter_5x5.png",
+      "source_sha256": "3d5abad73df144f4eed25e0eea0fa092325f981f014e907ff31d6a10d325e294",
       "source_size": [
-        4,
-        4
+        5,
+        5
       ],
       "symbol": "sprite_projectile_spitter",
       "transparent_value": 0
     },
     {
       "content_size": [
-        6,
-        6
+        7,
+        7
       ],
       "crop": [
         0,
         0,
-        6,
-        6
+        7,
+        7
       ],
       "group": "_final_sprites",
       "offset": [
@@ -1972,16 +1972,16 @@
         0
       ],
       "output_size": [
-        6,
-        6
+        7,
+        7
       ],
-      "payload_sha256": "c7f297ce0d284f211e74f4b3b47171d6a79698d1b6204d1d0dd2dbf2ff839815",
+      "payload_sha256": "9d7d07e17ec3fea4b75f652bbaa14e97c59e2d02cf577a586978ce0c792986c6",
       "resampling": "none",
-      "source": "06_PROJETEIS/projectile_boss_green_6x6.png",
-      "source_sha256": "a2521d902da59c71f60a2c49c47ea65c023318b514afd23ff6d071ff657b588f",
+      "source": "06_PROJETEIS/projectile_boss_green_7x7.png",
+      "source_sha256": "30630b2e2de82d33ebfa78f7a74f4a4a1f0b9d33b523a4d7472dc098c3ab69ac",
       "source_size": [
-        6,
-        6
+        7,
+        7
       ],
       "symbol": "sprite_projectile_boss",
       "transparent_value": 0

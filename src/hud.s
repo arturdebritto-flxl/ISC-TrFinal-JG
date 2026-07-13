@@ -44,7 +44,7 @@ draw_hud:
     lw a4, 4(sp)
     call draw_small_number
 
-    la a0, label_vidas
+    la a0, label_hp
     li a1, 56
     li a2, 8
     li a3, COLOR_WHITE
@@ -53,11 +53,18 @@ draw_hud:
 
     la t0, player_lives
     lw a0, 0(t0)
-    li a1, 80
+    li a1, 72
     li a2, 8
     li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
+
+    la a0, label_hp_max
+    li a1, 76
+    li a2, 8
+    li a3, COLOR_WHITE
+    lw a4, 4(sp)
+    call draw_small_text
 
     la a0, label_fase
     li a1, 110

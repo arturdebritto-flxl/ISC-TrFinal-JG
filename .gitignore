@@ -59,3 +59,30 @@ replay_pid*
 .env
 .env.*
 !.env.example
+# Local AI tooling
+.agents/
+.codex/
+AGENTS.override.md
+
+# Experimental Indexed8
+/test_indexed8_palette.s
+/test_town_indexed8_background.s
+/src/palette.s
+/tools/build_town_indexed8.py
+/tests/test_town_indexed8.py
+/assets/generated/backgrounds.s
+/assets/generated/town_base_indexed8.bin
+/assets/generated/town_exit_overlay.bin
+/assets/generated/town_palette_rgb.bin
+/assets/generated/town_indexed8_metrics.json
+/assets/generated/town_preview_base.png
+/assets/generated/town_preview_highlight.png
+/assets/generated/town_comparison.png
+
+# Generated visual diagnostics
+/assets/generated/text_cutscene_previews/
+/assets/generated/town_bgr233_preview.png
+/assets/generated/town_bgr233_highlight_preview.png
+/assets/generated/town_bgr233_comparison.png
+/assets/generated/town_bgr233_obstacles_check.png
+/assets/generated/town_bgr233_metrics.json

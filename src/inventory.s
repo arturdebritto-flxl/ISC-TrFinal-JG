@@ -176,9 +176,13 @@ start_rifle_reload:
     li a1, 60
     li a2, 115
     li a3, 64
+    la t0, sfx_enabled
+    lw t0, 0(t0)
+    beqz t0, skip_rifle_reload_sfx
     li a7, 31
     ecall
 
+skip_rifle_reload_sfx:
     la t0, noise_timer
     lw t1, 0(t0)
     li t2, NOISE_RELOAD_FRAMES
@@ -232,9 +236,13 @@ start_shotgun_reload:
     li a1, 70
     li a2, 115
     li a3, 70
+    la t0, sfx_enabled
+    lw t0, 0(t0)
+    beqz t0, skip_shotgun_reload_sfx
     li a7, 31
     ecall
 
+skip_shotgun_reload_sfx:
     la t0, noise_timer
     lw t1, 0(t0)
     li t2, NOISE_RELOAD_FRAMES
@@ -329,6 +337,9 @@ try_use_heal:
     li a1, 80
     li a2, 9
     li a3, 80
+    la t0, sfx_enabled
+    lw t0, 0(t0)
+    beqz t0, end_handle_heal_input
     li a7, 31
     ecall
 
@@ -456,54 +467,35 @@ draw_inventory:
     call get_draw_base_address
     sw a0, 4(sp)
 
-    li t2, USE_SPRITE_INVENTORY
-    beqz t2, draw_inventory_text_fields
-
     la t0, weapon_type
     lw t1, 0(t0)
 
     li t2, WEAPON_SHOTGUN
-    beq t1, t2, select_inventory_shotgun_icon
+    beq t1, t2, select_inventory_shotgun_label
 
     li t2, WEAPON_UZI
-    beq t1, t2, select_inventory_uzi_icon
+    beq t1, t2, select_inventory_uzi_label
 
-select_inventory_pistol_icon:
-    la a2, sprite_weapon_normal_icon
-    j draw_inventory_weapon_icon
+select_inventory_pistol_label:
+    la a0, label_weapon_pistol
+    j draw_inventory_weapon_label
 
-select_inventory_shotgun_icon:
-    la a2, sprite_weapon_shotgun_icon
-    j draw_inventory_weapon_icon
+select_inventory_shotgun_label:
+    la a0, label_weapon_shotgun
+    j draw_inventory_weapon_label
 
-select_inventory_uzi_icon:
-    la a2, sprite_weapon_boss_icon
+select_inventory_uzi_label:
+    la a0, label_weapon_uzi
 
-draw_inventory_weapon_icon:
-    li a0, 176
-    li a1, 216
-    li a3, 16
-    li a4, 16
-    call draw_sprite_8bpp_fast
-
-draw_inventory_text_fields:
-    la a0, label_arma
+draw_inventory_weapon_label:
     li a1, 8
     li a2, 216
     li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_text
 
-    la t0, weapon_type
-    lw a0, 0(t0)
-    li a1, 30
-    li a2, 216
-    li a3, COLOR_WHITE
-    lw a4, 4(sp)
-    call draw_small_number
-
     la a0, label_municao
-    li a1, 48
+    li a1, 72
     li a2, 216
     li a3, COLOR_WHITE
     lw a4, 4(sp)
@@ -531,14 +523,14 @@ draw_uzi_mag_ammo:
     li a0, 0
 
 draw_mag_ammo_number:
-    li a1, 82
+    li a1, 106
     li a2, 216
     li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
     li a0, '/'
-    li a1, 98
+    li a1, 122
     li a2, 216
     li a3, COLOR_WHITE
     lw a4, 4(sp)
@@ -572,29 +564,14 @@ draw_uzi_total_ammo:
     lw a0, 0(t0)
 
 draw_total_ammo_value:
-    li a1, 102
+    li a1, 128
     li a2, 216
     li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
 
-    la a0, label_uzi
-    li a1, 8
-    li a2, 224
-    li a3, COLOR_WHITE
-    lw a4, 4(sp)
-    call draw_small_text
-
-    la t0, boss_ammo_count
-    lw a0, 0(t0)
-    li a1, 30
-    li a2, 224
-    li a3, COLOR_WHITE
-    lw a4, 4(sp)
-    call draw_small_number
-
     la a0, label_cura
-    li a1, 64
+    li a1, 8
     li a2, 224
     li a3, COLOR_WHITE
     lw a4, 4(sp)
@@ -602,18 +579,11 @@ draw_total_ammo_value:
 
     la t0, heal_count
     lw a0, 0(t0)
-    li a1, 86
+    li a1, 30
     li a2, 224
     li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number
-
-    la a0, label_rec
-    li a1, 120
-    li a2, 224
-    li a3, COLOR_WHITE
-    lw a4, 4(sp)
-    call draw_small_text
 
     la t0, weapon_type
     lw t1, 0(t0)
@@ -621,7 +591,7 @@ draw_total_ammo_value:
     beq t1, t2, draw_shotgun_reload_timer
 
     li t2, WEAPON_UZI
-    beq t1, t2, draw_uzi_reload_timer
+    beq t1, t2, end_draw_inventory
 
     la t0, rifle_reload_timer
     j draw_reload_timer_value
@@ -631,14 +601,20 @@ draw_shotgun_reload_timer:
 
 draw_reload_timer_value:
     lw a0, 0(t0)
-    j draw_reload_timer_number
+    blez a0, end_draw_inventory
 
-draw_uzi_reload_timer:
-    li a0, 0
+    # ceil((frames * 16 ms) / 1000) nunca exibe 0 enquanto a recarga
+    # estiver ativa. A area fica limpa pelo background do Town ou pelo
+    # clear do frame nos demais mapas.
+    li t0, DEBUG_FRAME_DELAY_MS
+    mul a0, a0, t0
+    addi a0, a0, 999
+    li t0, 1000
+    div a0, a0, t0
 
 draw_reload_timer_number:
-    li a1, 138
-    li a2, 224
+    li a1, 152
+    li a2, 216
     li a3, COLOR_WHITE
     lw a4, 4(sp)
     call draw_small_number

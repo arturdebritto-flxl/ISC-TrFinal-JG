@@ -29,6 +29,35 @@ init_level1:
     la t0, wave_spawned
     sw zero, 0(t0)
 
+    la t0, town_spawn_timer
+    li t1, TOWN_FIRST_SPAWN_DELAY
+    sw t1, 0(t0)
+
+    la t0, town_exit_unlocked
+    sw zero, 0(t0)
+    la t0, town_exit_blink_timer
+    sw zero, 0(t0)
+    la t0, town_exit_blink_frame
+    sw zero, 0(t0)
+    la t0, town_exit_transitioned
+    sw zero, 0(t0)
+
+    ret
+
+get_town_wave_enemy_count:
+    la t0, current_wave
+    lw t1, 0(t0)
+    li a0, TOWN_WAVE1_ENEMIES
+    li t2, 1
+    beq t1, t2, finish_get_town_wave_enemy_count
+    li a0, TOWN_WAVE2_ENEMIES
+    li t2, 2
+    beq t1, t2, finish_get_town_wave_enemy_count
+    li a0, TOWN_WAVE3_ENEMIES
+    li t2, 3
+    beq t1, t2, finish_get_town_wave_enemy_count
+    li a0, TOWN_WAVE4_ENEMIES
+finish_get_town_wave_enemy_count:
     ret
 
 # ------------------------------------------------------------
@@ -227,6 +256,14 @@ advance_wave:
 # ------------------------------------------------------------
 
 advance_town_wave:
+    call get_town_wave_enemy_count
+    mv t2, a0
+    la t0, wave_spawned
+    lw t1, 0(t0)
+    bne t1, t2, end_advance_wave
+    call count_active_enemies
+    bnez a0, end_advance_wave
+
     la t0, current_wave
     lw t1, 0(t0)
 
@@ -255,6 +292,10 @@ start_town_wave2:
     la t0, wave_spawned
     sw zero, 0(t0)
 
+    la t0, town_spawn_timer
+    li t1, TOWN_FIRST_SPAWN_DELAY
+    sw t1, 0(t0)
+
     j end_advance_wave
 
 start_town_wave3:
@@ -267,6 +308,10 @@ start_town_wave3:
 
     la t0, wave_spawned
     sw zero, 0(t0)
+
+    la t0, town_spawn_timer
+    li t1, TOWN_FIRST_SPAWN_DELAY
+    sw t1, 0(t0)
 
     j end_advance_wave
 
@@ -282,12 +327,82 @@ start_town_wave4:
     la t0, wave_spawned
     sw zero, 0(t0)
 
+    la t0, town_spawn_timer
+    li t1, TOWN_FIRST_SPAWN_DELAY
+    sw t1, 0(t0)
+
     j end_advance_wave
 
 
 finish_town:
-    call set_state_cutscene_level2
+    la t0, town_exit_unlocked
+    lw t1, 0(t0)
+    bnez t1, end_advance_wave
+    li t1, 1
+    sw t1, 0(t0)
+    la t0, town_exit_blink_timer
+    sw zero, 0(t0)
+    la t0, town_exit_blink_frame
+    sw zero, 0(t0)
     j end_advance_wave
+
+# Pisca apenas visualmente e dispara Town -> cutscene/Sewer uma vez quando
+# o centro do jogador entra no raio do bueiro.
+update_town_exit:
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
+    la t0, current_level
+    lw t1, 0(t0)
+    li t2, LEVEL_TOWN
+    bne t1, t2, end_update_town_exit
+    la t0, town_exit_unlocked
+    lw t1, 0(t0)
+    beqz t1, end_update_town_exit
+    la t0, town_exit_transitioned
+    lw t1, 0(t0)
+    bnez t1, end_update_town_exit
+
+    la t0, town_exit_blink_timer
+    lw t1, 0(t0)
+    addi t1, t1, 1
+    li t2, TOWN_EXIT_BLINK_FRAMES
+    blt t1, t2, store_town_exit_blink_timer
+    sw zero, 0(t0)
+    la t0, town_exit_blink_frame
+    lw t1, 0(t0)
+    xori t1, t1, 1
+    sw t1, 0(t0)
+    j check_town_exit_trigger
+
+store_town_exit_blink_timer:
+    sw t1, 0(t0)
+
+check_town_exit_trigger:
+    la t0, player_x
+    lw t1, 0(t0)
+    addi t1, t1, 8
+    addi t1, t1, -TOWN_EXIT_CENTER_X
+    mul t1, t1, t1
+    la t0, player_y
+    lw t2, 0(t0)
+    addi t2, t2, 8
+    addi t2, t2, -TOWN_EXIT_CENTER_Y
+    mul t2, t2, t2
+    add t1, t1, t2
+    li t2, TOWN_EXIT_RADIUS_SQUARED
+    bgt t1, t2, end_update_town_exit
+
+    la t0, town_exit_transitioned
+    li t1, 1
+    sw t1, 0(t0)
+    call clear_input_buffers
+    call set_state_cutscene_level2
+
+end_update_town_exit:
+    lw ra, 0(sp)
+    addi sp, sp, 4
+    ret
 
 
 # ------------------------------------------------------------
